@@ -3,11 +3,12 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import datetime
-
 import numpy as np
 import speech_recognition as sr
 from gtts import gTTS
 import os
+import transformers
+
 
 #Build the Chatbot
 from playsound import playsound
@@ -51,6 +52,9 @@ class ChatBot():
 #Run the ChatBot
 if __name__ == '__main__':
     ai = ChatBot(name="maya")
+    nlp = transformers.pipeline("conversational",
+                                model="microsoft/DialoGPT-medium")
+    os.environ["TOKENIZERS_PARALLELISM"] = "true"
     while True:
         ai.speech_to_text()
         ## wake up
@@ -69,6 +73,11 @@ if __name__ == '__main__':
                  "I'm here if you need me!"
                 ]
             )
+        ## conversation
+        else:
+            chat = nlp(transformers.Conversation(ai.text), pad_token_id=50256)
+            res = str(chat)
+            res = res[res.find("bot >> ")+6:].strip()
         ai.text_to_speech(res)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
