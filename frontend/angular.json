@@ -32,7 +32,11 @@
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/chat.js",
+              "src/assets/js/Chatroom.js",
+              "src/assets/js/RasaChatWidget.js"
+            ],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,
