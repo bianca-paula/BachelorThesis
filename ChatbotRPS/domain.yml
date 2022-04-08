@@ -1,0 +1,313 @@
+version: '3.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false
+entities:
+- gender
+#- symptom
+- number
+- level
+- boolean_entity
+intents:
+- request_cvd_prediction
+- inform_height
+- inform_weight
+- inform_systolic_blood_pressure
+- inform_diastolic_blood_pressure
+- inform_age
+- inform_gender
+#- greet
+#- request_cvd_prediction
+- inform_cholesterol_level
+- inform_glucose_level
+- inform_drinks_alcohol
+- inform_is_smoking
+- inform_is_physically_active
+#- goodbye
+#- affirm
+#- deny
+#- request_names
+#- request_medicine_information
+#- request_diagnosis
+#- give_symptom
+#- request_appointment
+#- request_nearest_hospitals
+#- mood_great
+#- mood_unhappy
+#- bot_challenge
+slots:
+  age:
+    type: float
+    min_value: 0
+    max_value: 100
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+#      role: age
+#    - type: from_entity
+#      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: age
+  height:
+    type: float
+    min_value: 100
+    max_value: 250
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+#      role: h
+#    - type: from_entity
+#      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: height
+  weight:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+#      role: w
+#    - type: from_entity
+#      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: weight
+  systolic_blood_pressure:
+    type: float
+    min_value: 100
+    max_value: 130
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+#      role: s
+#    - type: from_entity
+#      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: systolic_blood_pressure
+  diastolic_blood_pressure:
+    type: float
+    min_value: 40
+    max_value: 100
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+#      role: d
+#    - type: from_entity
+#      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: diastolic_blood_pressure
+  gender:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: gender
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: gender
+  cholesterol_level:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: level
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: cholesterol_level
+  glucose_level:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: level
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: glucose_level
+  is_smoking:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: boolean_entity
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: is_smoking
+  drinks_alcohol:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: boolean_entity
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: drinks_alcohol
+  is_physically_active:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: boolean_entity
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: is_physically_active
+#  symptoms:
+#    type: list
+#    influence_conversation: true
+#    mappings:
+#    - type: from_entity
+#      entity: symptom
+#  medicine:
+#    type: text
+#    influence_conversation: true
+#    mappings:
+#    - type: from_text
+#      conditions:
+#      - active_loop: medicine_form
+#        requested_slot: medicine
+#  first_name:
+#    type: text
+#    influence_conversation: true
+#    mappings:
+#    - type: from_text
+#      conditions:
+#      - active_loop: name_form
+#        requested_slot: first_name
+#  last_name:
+#    type: text
+#    influence_conversation: true
+#    mappings:
+#    - type: from_text
+#      conditions:
+#      - active_loop: name_form
+#        requested_slot: last_name
+responses:
+  utter_ask_height:
+  - text: what is height?
+  utter_ask_weight:
+  - text: what is weight?
+  utter_ask_systolic_blood_pressure:
+  - text: what is systolic_blood_pressure?
+  utter_ask_diastolic_blood_pressure:
+  - text: what is diastolic_blood_pressure?
+#  utter_ask_blood_pressure:
+#  - text: what is blood pressure?
+#  utter_greet:
+#  - text: Hello, how can I help you today?
+#  utter_cheer_up:
+#  - text: 'Here is something to cheer you up:'
+#    image: https://i.imgur.com/nGF1K8f.jpg
+#  utter_did_that_help:
+#  - text: Did that help you?
+#  utter_happy:
+#  - text: Great, carry on!
+#  utter_goodbye:
+#  - text: Bye
+#  utter_iamabot:
+#  - text: I am a bot, powered by Rasa.
+#  utter_ask_first_name:
+#  - text: What is your first name?
+#  utter_ask_last_name:
+#  - text: So {first_name}, what is your last name?
+  utter_ask_age:
+  - text: What is your age?
+  utter_ask_gender:
+  - text: What is your gender?
+  utter_ask_cholesterol_level:
+  - text: What is your cholesterol level?
+  utter_ask_glucose_level:
+  - text: What is your glucose level?
+  utter_ask_is_smoking:
+  - text: Are you a smoker?
+    buttons:
+    - title: "Yes"
+      payload: '/set_is_smoking{"is_smoking":"Yes"}'
+    - title: "No"
+      payload: '/set_is_smoking{"is_smoking":"No"}'
+  utter_ask_drinks_alcohol:
+  - text: Do you drink alcohol regularly?
+    buttons:
+    - title: "Yes"
+      payload: '/set_drinks_alcohol{"drinks_alcohol":"Yes"}'
+    - title: "No"
+      payload: '/set_drinks_alcohol{"drinks_alcohol":"No"}'
+  utter_ask_is_physically_active:
+  - text: Are you an active person?
+    buttons:
+    - title: "Yes"
+      payload: '/set_is_physically_active{"is_physically_active":"Yes"}'
+    - title: "No"
+      payload: '/set_is_physically_active{"is_physically_active":"No"}'
+#  utter_submit:
+#  - text: Ok. Thanks!
+#  utter_slots_values:
+#  - text: I will remember that your name is {first_name} {last_name}!
+#  utter_slot_medicine_value:
+#  - text: Your med is {medicine}
+#  utter_ask_medicine:
+#  - text: What med?
+#  utter_ask_symptom:
+#  - text: what symptom?
+actions:
+#- action_get_medicine_information
+#- action_get_symptom
+#- utter_ask_medicine
+#- utter_greet
+#- utter_slot_medicine_value
+#- utter_slots_values
+#- utter_submit
+
+- utter_ask_is_smoking
+- utter_ask_height
+- utter_ask_weight
+- utter_ask_systolic_blood_pressure
+- utter_ask_diastolic_blood_pressure
+- utter_ask_age
+- utter_ask_gender
+- utter_ask_cholesterol_level
+- utter_ask_glucose_level
+- utter_ask_drinks_alcohol
+- utter_ask_is_physically_active
+#- utter_ask_blood_pressure
+- extract_number
+forms:
+  predict_cvd_form:
+    required_slots:
+      - drinks_alcohol
+      - is_smoking
+      - age
+      - gender
+      - height
+      - weight
+      - systolic_blood_pressure
+      - diastolic_blood_pressure
+      - cholesterol_level
+      - glucose_level
+      - is_physically_active
+#  name_form:
+#    required_slots:
+#    - first_name
+#    - last_name
+#  diagnose_cvd_form:
+#    required_slots:
+##    - age
+##    - gender
+#    - height
+#    - weight
+#    - systolic_blood_pressure
+#    - diastolic_blood_pressure
+#    - cholesterol_level
+#    - glucose_level
+#    - is_smoking
+#    - drinks_alcohol
+#    - is_physically_active
+#  medicine_form:
+#    required_slots:
+#    - medicine
