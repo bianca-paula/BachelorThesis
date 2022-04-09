@@ -1,4 +1,4 @@
-alert("Pop up2");
+// alert("Pop up2");
 
 // function addChat() {
 //
@@ -15,16 +15,18 @@ alert("Pop up2");
 
 
 
-function addChat() {
-  console.log("aaaaaaaaaaaaaaaaaaaaa");
-  var chatroom = new window.Chatroom({
-    host: "http://localhost:5005",
-    title: "Chat with the medical chatbot",
-    container: document.querySelector(".chat-container"),
-    welcomeMessage: "Hi, I am a medical chatbot. How may I help you?",
-    speechRecognition: "en-US",
-    voiceLang: "en-US"
-  });
-  chatroom.openChat();
 
-}
+
+// function addChat() {
+//   console.log("aaaaaaaaaaaaaaaaaaaaa");
+//   var chatroom = new window.Chatroom({
+//     host: "http://localhost:5005",
+//     title: "Chat with the medical chatbot",
+//     container: document.querySelector(".chat-container"),
+//     welcomeMessage: "Hi, I am a medical chatbot. How may I help you?",
+//     speechRecognition: "en-US",
+//     voiceLang: "en-US"
+//   });
+//   // chatroom.openChat();
+
+// }

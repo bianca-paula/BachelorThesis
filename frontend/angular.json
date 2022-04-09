@@ -31,11 +31,9 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": ["src/theme/variables.scss", "src/global.scss", "src/assets/style/chatbot-style.css"],
             "scripts": [
-              "src/assets/js/chat.js",
-              "src/assets/js/Chatroom.js",
-              "src/assets/js/RasaChatWidget.js"
+              "src/assets/js/chat.js"
             ],
             "aot": false,
             "vendorChunk": true,

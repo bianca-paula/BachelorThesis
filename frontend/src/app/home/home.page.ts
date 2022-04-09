@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-declare function addChat(): void;
+// declare function addChat(): void;
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -10,6 +10,10 @@ export class HomePage implements OnInit{
   constructor() {}
 
   ngOnInit(): void{
-    addChat();
+    // addChat();
   }
+
+  ngAfterViewInit(): void{
+    import('../../assets/js/RasaWidget.js');
+  } 
 }
