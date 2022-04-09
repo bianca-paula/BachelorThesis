@@ -1,0 +1,227 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - request_cvd_prediction
+  - inform_height
+  - inform_weight
+  - inform_systolic_blood_pressure
+  - inform_diastolic_blood_pressure
+  - inform_age
+  - inform_gender
+  - inform_cholesterol_level
+  - inform_glucose_level
+  - inform_drinks_alcohol
+  - inform_is_smoking
+  - inform_is_physically_active
+
+entities:
+- gender
+- number
+- level
+- boolean_entity
+- drinks_alcohol
+
+slots:
+  age:
+    type: float
+    min_value: 0
+    max_value: 100
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: age
+  height:
+    type: float
+    min_value: 100
+    max_value: 250
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: height
+  weight:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: weight
+  systolic_blood_pressure:
+    type: float
+    min_value: 100
+    max_value: 130
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: systolic_blood_pressure
+  diastolic_blood_pressure:
+    type: float
+    min_value: 40
+    max_value: 100
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+      conditions:
+        - active_loop: predict_cvd_form
+          requested_slot: diastolic_blood_pressure
+  gender:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: gender
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: gender
+  cholesterol_level:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: level
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: cholesterol_level
+  glucose_level:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: level
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: glucose_level
+  is_smoking:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: boolean_entity
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: is_smoking
+  drinks_alcohol:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: drinks_alcohol
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: drinks_alcohol
+  is_physically_active:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: boolean_entity
+      conditions:
+      - active_loop: predict_cvd_form
+        requested_slot: is_physically_active
+responses:
+  utter_ask_height:
+  - text: what is height?
+  utter_ask_weight:
+  - text: what is weight?
+  utter_ask_systolic_blood_pressure:
+  - text: what is systolic_blood_pressure?
+  utter_ask_diastolic_blood_pressure:
+  - text: what is diastolic_blood_pressure?
+  utter_greet:
+  - text: "Hey! How are you?"
+  utter_ask_age:
+  - text: What is your age?
+  utter_ask_gender:
+  - text: What is your gender?
+  utter_ask_cholesterol_level:
+  - text: What is your cholesterol level?
+  utter_ask_glucose_level:
+  - text: What is your glucose level?
+  utter_ask_is_smoking:
+  - text: Are you a smoker?
+    buttons:
+    - title: "Yes"
+      payload: '/set_is_smoking{"is_smoking":"Yes"}'
+    - title: "No"
+      payload: '/set_is_smoking{"is_smoking":"No"}'
+  utter_ask_drinks_alcohol:
+  - text: Do you drink alcohol regularly?
+    buttons:
+    - payload: "True"
+      title: "True"
+    - payload: "False"
+      title: "False"
+
+  utter_ask_is_physically_active:
+  - text: Are you an active person?
+    buttons:
+    - title: "Yes"
+      payload: '/set_is_physically_active{"is_physically_active":"Yes"}'
+    - title: "No"
+      payload: '/set_is_physically_active{"is_physically_active":"No"}'
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+actions:
+- utter_ask_is_smoking
+- utter_ask_height
+- utter_ask_weight
+- utter_ask_systolic_blood_pressure
+- utter_ask_diastolic_blood_pressure
+- utter_ask_age
+- utter_ask_gender
+- utter_ask_cholesterol_level
+- utter_ask_glucose_level
+- utter_ask_drinks_alcohol
+- utter_ask_is_physically_active
+- extract_number
+
+forms:
+  predict_cvd_form:
+    required_slots:
+      - drinks_alcohol
+      - is_smoking
+      - age
+      - gender
+      - height
+      - weight
+      - systolic_blood_pressure
+      - diastolic_blood_pressure
+      - cholesterol_level
+      - glucose_level
+      - is_physically_active
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false

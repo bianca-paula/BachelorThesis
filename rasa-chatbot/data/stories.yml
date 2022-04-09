@@ -1,0 +1,91 @@
+version: "3.1"
+
+stories:
+- story: predict disease
+  steps:
+  - intent: request_cvd_prediction
+  - action: predict_cvd_form
+  - slot_was_set:
+    - requested_slot: age
+  - slot_was_set:
+    - age: 22
+
+  - slot_was_set:
+    - requested_slot: gender
+  - slot_was_set:
+    - gender: female
+
+  - slot_was_set:
+    - requested_slot: height
+  - slot_was_set:
+    - height: 165
+
+  - slot_was_set:
+    - requested_slot: weight
+  - slot_was_set:
+    - weight: 60
+
+  - slot_was_set:
+    - requested_slot: systolic_blood_pressure
+  - slot_was_set:
+    - systolic_blood_pressure: 129
+
+  - slot_was_set:
+    - requested_slot: diastolic_blood_pressure
+  - slot_was_set:
+    - diastolic_blood_pressure: 80
+
+  - slot_was_set:
+      - requested_slot: cholesterol_level
+  - slot_was_set:
+      - cholesterol_level: normal
+
+  - slot_was_set:
+    - requested_slot: glucose_level
+  - slot_was_set:
+    - glucose_level: normal
+
+  - slot_was_set:
+    - requested_slot: drinks_alcohol
+  - slot_was_set:
+    - drinks_alcohol: Yes
+
+  - slot_was_set:
+    - requested_slot: is_physically_active
+  - slot_was_set:
+    - is_physically_active: Yes
+
+  - slot_was_set:
+    - requested_slot: is_smoking
+  - slot_was_set:
+    - is_smoking: Yes
+
+  - slot_was_set:
+    - requested_slot: null
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
