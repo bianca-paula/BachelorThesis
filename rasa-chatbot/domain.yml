@@ -20,6 +20,12 @@ intents:
   - inform_drinks_alcohol
   - inform_is_smoking
   - inform_is_physically_active
+  - inform_level
+  - ask_normal_blood_pressure
+  - ask_blood_pressure_ranges
+  - ask_about_systolic_blood_pressure
+  - ask_about_diastolic_blood_pressure
+  - ask_about_heart_rate
 
 entities:
 - gender
@@ -92,8 +98,12 @@ slots:
       - active_loop: predict_cvd_form
         requested_slot: gender
   cholesterol_level:
-    type: text
+    type: categorical
     influence_conversation: true
+    values:
+      - normal
+      - above normal
+      - well above normal
     mappings:
     - type: from_entity
       entity: level
@@ -110,7 +120,7 @@ slots:
       - active_loop: predict_cvd_form
         requested_slot: glucose_level
   is_smoking:
-    type: text
+    type: bool
     influence_conversation: true
     mappings:
     - type: from_entity
@@ -123,12 +133,12 @@ slots:
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: drinks_alcohol
+      entity: boolean_entity
       conditions:
       - active_loop: predict_cvd_form
         requested_slot: drinks_alcohol
   is_physically_active:
-    type: text
+    type: bool
     influence_conversation: true
     mappings:
     - type: from_entity
@@ -158,10 +168,10 @@ responses:
   utter_ask_is_smoking:
   - text: Are you a smoker?
     buttons:
-    - title: "Yes"
-      payload: '/set_is_smoking{"is_smoking":"Yes"}'
-    - title: "No"
-      payload: '/set_is_smoking{"is_smoking":"No"}'
+    - payload: "True"
+      title: "True"
+    - payload: "False"
+      title: "False"
   utter_ask_drinks_alcohol:
   - text: Do you drink alcohol regularly?
     buttons:
@@ -173,13 +183,34 @@ responses:
   utter_ask_is_physically_active:
   - text: Are you an active person?
     buttons:
-    - title: "Yes"
-      payload: '/set_is_physically_active{"is_physically_active":"Yes"}'
-    - title: "No"
-      payload: '/set_is_physically_active{"is_physically_active":"No"}'
+    - payload: "True"
+      title: "True"
+    - payload: "False"
+      title: "False"
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
     image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_normal_blood_pressure_values:
+  - text: "Blood pressure numbers of less than 120/80 mmHg, that is less than 120 mmHg systolic and less than 80 mmHg diastolic,
+   are considered within the normal range. "
+  utter_blood_pressure_ranges:
+  - text: "The blood pressure categories are: \n
+  Normal, which means blood pressure numbers of less than 120/80 mmHg \n
+  Elevated, when readings consistently range from 120-129 systolic and less than 80 mm Hg diastolic. \n
+  Hypertension Stage 1, when blood pressure consistently ranges from 130-139 systolic or 80-89 mm Hg diastolic. \n
+  Hypertension Stage 2, when blood pressure consistently ranges at 140/90 mm Hg or higher \n
+  Hypertensive crisis, when blood pressure is higher than 180/120 mm Hg. \n
+  This stage of high blood pressure requires medical attention.
+  "
+
+  utter_what_is_systolic:
+  - text: "The systolic blood pressure indicates how much pressure your blood is exerting against your artery walls when the heart beats."
+
+  utter_what_is_diastolic:
+  - text: "The diastolic blood pressure indicates how much pressure your blood is exerting against your artery walls while the heart is resting between beats."
+  utter_normal_heart_rate:
+  - text: "A normal heart rate for adults is between 60 and 100 beats per minute (BPM), and varies based on age group and gender."
 
   utter_did_that_help:
   - text: "Did that help you?"
@@ -205,11 +236,18 @@ actions:
 - utter_ask_glucose_level
 - utter_ask_drinks_alcohol
 - utter_ask_is_physically_active
+- utter_normal_blood_pressure_values
+- utter_blood_pressure_ranges
+- utter_what_is_systolic
+- utter_what_is_diastolic
+- utter_normal_heart_rate
 - extract_number
 
 forms:
   predict_cvd_form:
     required_slots:
+      - cholesterol_level
+      - glucose_level
       - drinks_alcohol
       - is_smoking
       - age
@@ -218,8 +256,6 @@ forms:
       - weight
       - systolic_blood_pressure
       - diastolic_blood_pressure
-      - cholesterol_level
-      - glucose_level
       - is_physically_active
 
 session_config:

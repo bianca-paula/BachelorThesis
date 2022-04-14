@@ -114,10 +114,10 @@ nlu:
   examples: |
     - [No](boolean_entity)
     - [Yes](boolean_entity)
-#- intent: inform_drinks_alcohol
-#  examples: |
-#    - [No](boolean_entity)
-#    - [Yes](boolean_entity)
+- intent: inform_drinks_alcohol
+  examples: |
+    - [No](drinks_alcohol)
+    - [Yes](drinks_alcohol)
 - intent: inform_is_physically_active
   examples: |
     - [No](boolean_entity)

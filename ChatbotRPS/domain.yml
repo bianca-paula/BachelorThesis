@@ -8,6 +8,7 @@ entities:
 - number
 - level
 - boolean_entity
+- drinks_alcohol
 intents:
 - request_cvd_prediction
 - inform_height
@@ -145,7 +146,7 @@ slots:
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: boolean_entity
+      entity: drinks_alcohol
       conditions:
       - active_loop: predict_cvd_form
         requested_slot: drinks_alcohol
@@ -235,9 +236,9 @@ responses:
   - text: Do you drink alcohol regularly?
     buttons:
     - title: "Yes"
-      payload: '/set_drinks_alcohol{"drinks_alcohol":"Yes"}'
+      payload: '/inform_drinks_alcohol{{"drinks_alcohol":"Yes"}}'
     - title: "No"
-      payload: '/set_drinks_alcohol{"drinks_alcohol":"No"}'
+      payload: '/inform_drinks_alcohol{{"drinks_alcohol":"No"}}'
   utter_ask_is_physically_active:
   - text: Are you an active person?
     buttons:

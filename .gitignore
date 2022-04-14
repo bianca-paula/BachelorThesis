@@ -1,0 +1,10 @@
+rasa-chatbot/.rasa/
+rasa-chatbot/.idea/
+rasa-chatbot/models/
+ChatbotRPS/.rasa/
+ChatbotRPS/.idea/
+ChatbotRPS/models/
+ChatbotRPS/results/
+DiseasePredictionML/learn
+frontend2
+Ionic

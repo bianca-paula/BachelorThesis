@@ -1,6 +1,41 @@
 version: "3.1"
 
 nlu:
+# source:  https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings
+- intent: ask_normal_blood_pressure
+  examples: |
+    - What is a normal blood pressure level?
+    - What is the ideal blood pressure?
+    - What values should a normal blood pressure have?
+    - In what range is the blood pressure level considered normal?
+    - How much should my blood pressure be?
+- intent: ask_blood_pressure_ranges
+  examples: |
+    - What are the blood pressure ranges?
+    - What are the usual blood pressures?
+    - What are the categories of blood pressure?
+- intent: ask_about_systolic_blood_pressure
+  examples: |
+    - What is systolic blood pressure?
+    - What does systolic blood pressure mean?
+    - Tell me about systolic blood pressure
+    - What is the first number on a blood pressure reading?
+    - What is the high number of blood pressure?
+
+- intent: ask_about_diastolic_blood_pressure
+  examples: |
+    - What is diastolic blood pressure?
+    - What does diastolic blood pressure mean?
+    - Tell me about diastolic blood pressure
+    - What is the second number on a blood pressure reading?
+    - What is the low number of blood pressure?
+
+# www.onhealth.com/content/1/normal_healthy_heart_rate_charts_health_heart
+- intent: ask_about_heart_rate
+  examples: |
+    - What is a healthy resting heart rate for an adult?
+    - How much should my heart rate be?
+    - What is a normal heart rate?
 - intent: request_cvd_prediction
   examples: |
     - Could you please predict my risk of having a cardiovascular disease?
@@ -97,32 +132,39 @@ nlu:
 #    - I usually have [60]{"entity": "number", "role": "diastolic_pressure"}
 #    - It is [70]{"entity": "number", "role": "diastolic_pressure"}
 #    - [80]{"entity": "number", "role": "diastolic_pressure"}
-- intent: inform_cholesterol_level
+#- intent: inform_cholesterol_level
+#  examples: |
+#    - My cholesterol level is [normal](level)
+#    - Cholesterol level is [above normal](level)
+#    - Cholesterol is [well above normal](level)
+#- intent: inform_glucose_level
+#  examples: |
+#    - My glucose level is [normal](level)
+#    - Glucose level is [above normal](level)
+#    - Glucose is [well above normal](level)
+- intent: inform_level
   examples: |
-    - My cholesterol level is [normal](level)
-    - Cholesterol level is [above normal](level)
     - Level is usually [well above normal](level)
     - It is [normal](level)
-    - Not sure, I think it is [normal](level)
-- intent: inform_glucose_level
-  examples: |
+    - Not sure, I think it is [above normal](level)
     - My glucose level is [normal](level)
     - Glucose level is [above normal](level)
-    - Level is usually [well above normal](level)
-    - It is [normal](level)
-    - Not sure, I think it is [normal](level)
+    - Glucose is [well above normal](level)
+    - My cholesterol level is [normal](level)
+    - Cholesterol level is [above normal](level)
+    - Cholesterol is [well above normal](level)
 - intent: inform_is_smoking
   examples: |
-    - [No](boolean_entity)
-    - [Yes](boolean_entity)
+    - [False](boolean_entity)
+    - [True](boolean_entity)
 - intent: inform_drinks_alcohol
   examples: |
-    - [False](drinks_alcohol)
-    - [True](drinks_alcohol)
+    - [False](boolean_entity)
+    - [True](boolean_entity)
 - intent: inform_is_physically_active
   examples: |
-    - [No](boolean_entity)
-    - [Yes](boolean_entity)
+    - [False](boolean_entity)
+    - [True](boolean_entity)
 - intent: greet
   examples: |
     - hey
