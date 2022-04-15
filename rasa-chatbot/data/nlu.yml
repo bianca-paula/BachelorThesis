@@ -1,37 +1,32 @@
 version: "3.1"
-
 nlu:
-# source:  https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings
-- intent: ask_normal_blood_pressure
+- intent: faq/ask_normal_blood_pressure
   examples: |
     - What is a normal blood pressure level?
     - What is the ideal blood pressure?
     - What values should a normal blood pressure have?
     - In what range is the blood pressure level considered normal?
     - How much should my blood pressure be?
-- intent: ask_blood_pressure_ranges
+- intent: faq/ask_blood_pressure_ranges
   examples: |
     - What are the blood pressure ranges?
     - What are the usual blood pressures?
     - What are the categories of blood pressure?
-- intent: ask_about_systolic_blood_pressure
+- intent: faq/ask_about_systolic_blood_pressure
   examples: |
     - What is systolic blood pressure?
     - What does systolic blood pressure mean?
     - Tell me about systolic blood pressure
     - What is the first number on a blood pressure reading?
     - What is the high number of blood pressure?
-
-- intent: ask_about_diastolic_blood_pressure
+- intent: faq/ask_about_diastolic_blood_pressure
   examples: |
     - What is diastolic blood pressure?
     - What does diastolic blood pressure mean?
     - Tell me about diastolic blood pressure
     - What is the second number on a blood pressure reading?
     - What is the low number of blood pressure?
-
-# www.onhealth.com/content/1/normal_healthy_heart_rate_charts_health_heart
-- intent: ask_about_heart_rate
+- intent: faq/ask_about_heart_rate
   examples: |
     - What is a healthy resting heart rate for an adult?
     - How much should my heart rate be?
@@ -45,59 +40,47 @@ nlu:
     - Please predict the risk of having a heart disease
 - intent: inform_age
   examples: |
-    - My age is [20]{"entity":"number"}
-    - I am [30]{"entity":"number"}
-    - I am [40]{"entity":"number"} years old
-    - [41]{"entity":"number"}
-    - I am [40]{"entity":"number"}
-    - I am [22]{"entity":"number"}
+    - My age is [20](number)
+    - I am [30](number)
+    - I am [40](number) years old
+    - [41](number)
+    - I am [40](number)
+    - I am [22](number)
 - intent: inform_systolic_blood_pressure
   examples: |
-    - My usual systolic blood pressure is [129]{"entity": "number"}
-    - I usually have [130]{"entity": "number"}
-    - It is [140]{"entity": "number"}
-    - [125]{"entity": "number"}
-    - Systolic is [122]{"entity": "number"}
-    - I normally have [121]{"entity": "number"} systolic
-    - Hmm, I am not sure, it usually is [120]{"entity": "number"}
+    - My usual systolic blood pressure is [129](number)
+    - I usually have [130](number)
+    - It is [140](number)
+    - [125](number)
+    - Systolic is [122](number)
+    - I normally have [121](number) systolic
+    - Hmm, I am not sure, it usually is [120](number)
 - intent: inform_diastolic_blood_pressure
   examples: |
-    - My usual diastolic blood pressure is [50]{"entity": "number"}
-    - I usually have [60]{"entity": "number"}
-    - It is [70]{"entity": "number"}
-    - [80]{"entity": "number"}
-    - Diastolic is [90]{"entity": "number"} at highest
-    - Diastolic is [90]{"entity": "number"}
+    - My usual diastolic blood pressure is [50](number)
+    - I usually have [60](number)
+    - It is [70](number)
+    - [80](number)
+    - Diastolic is [90](number) at highest
+    - Diastolic is [90](number)
 - intent: inform_height
   examples: |
-    - My height is [165]{"entity":"number"}
-    - I am [100]{"entity":"number"}
-    - I am [100]{"entity":"number"} cm
-    - I am [155]{"entity":"number"} cms tall
-    - Height is [170]{"entity":"number"} cm
-    - [185]{"entity":"number"}
-    - I have [177]{"entity":"number"} cms
+    - My height is [165](number)
+    - I am [100](number)
+    - I am [100](number) cm
+    - I am [155](number) cms tall
+    - Height is [170](number) cm
+    - [185](number)
+    - I have [177](number) cms
 - intent: inform_weight
   examples: |
-    - My weight is [90]{"entity":"number"}
-    - I am [60]{"entity":"number"}
-    - I have [60]{"entity":"number"}
-    - I weigh [100]{"entity":"number"} kgs
-    - I have [70]{"entity":"number"} kilograms
-    - I've got [130]{"entity":"number"} kg
-    - [80]{"entity":"number"}
-#- intent: request_diagnosis
-#  examples: |
-#    - diagnosis
-#    - I need a diagnosis
-#    - Not feeling well
-#- intent: request_cvd_prediction
-#  examples: |
-#    - I want to know if I have a risk of heart disease
-#    - Predict my risk of getting a heart disease
-#    - Predict heart disease
-#    - predict heart disease
-
+    - My weight is [90](number)
+    - I am [60](number)
+    - I have [60](number)
+    - I weigh [100](number) kgs
+    - I have [70](number) kilograms
+    - I've got [130](number) kg
+    - [80](number)
 - intent: inform_gender
   examples: |
     - I am [female](gender)
@@ -109,39 +92,6 @@ nlu:
     - He is a [boy](gender)
     - She is a [girl](gender)
     - I am a [woman]{"entity": "gender", "value": "female"}
-    - [male](gender)
-#- intent: inform_height
-#  examples: |
-#    - My height is [165]{"entity": "number", "role": "height"}
-#    - I am [170]{"entity": "number", "role": "height"} cm
-#    - I'm [155]{"entity": "number", "role": "height"} tall
-#- intent: inform_weight
-#  examples: |
-#    - I weigh [50]{"entity": "number", "role": "weight"} kgs
-#    - I have [70]{"entity": "number", "role": "weight"} kgs
-#    - My weight is [80]{"entity": "number", "role": "weight"} kg
-#- intent: inform_systolic_blood_pressure
-#  examples: |
-#    - My usual systolic blood pressure is [129]{"entity": "number", "role": "systolic_pressure"}
-#    - I usually have [130]{"entity": "number", "role": "systolic_pressure"}
-#    - It is [140]{"entity": "number", "role": "systolic_pressure"}
-#    - [125]{"entity": "number", "role": "systolic_pressure"}
-#- intent: inform_diastolic_blood_pressure
-#  examples: |
-#    - My usual diastolic blood pressure is [50]{"entity": "number", "role": "diastolic_pressure"}
-#    - I usually have [60]{"entity": "number", "role": "diastolic_pressure"}
-#    - It is [70]{"entity": "number", "role": "diastolic_pressure"}
-#    - [80]{"entity": "number", "role": "diastolic_pressure"}
-#- intent: inform_cholesterol_level
-#  examples: |
-#    - My cholesterol level is [normal](level)
-#    - Cholesterol level is [above normal](level)
-#    - Cholesterol is [well above normal](level)
-#- intent: inform_glucose_level
-#  examples: |
-#    - My glucose level is [normal](level)
-#    - Glucose level is [above normal](level)
-#    - Glucose is [well above normal](level)
 - intent: inform_level
   examples: |
     - Level is usually [well above normal](level)
@@ -180,7 +130,6 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
 - intent: goodbye
   examples: |
     - cu
@@ -193,7 +142,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -202,7 +150,6 @@ nlu:
     - of course
     - that sounds good
     - correct
-
 - intent: deny
   examples: |
     - no
@@ -212,7 +159,6 @@ nlu:
     - don't like that
     - no way
     - not really
-
 - intent: mood_great
   examples: |
     - perfect
@@ -229,7 +175,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -246,7 +191,6 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?

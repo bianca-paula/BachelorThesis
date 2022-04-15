@@ -1,6 +1,12 @@
 version: "3.1"
 
 stories:
+- story: Handle faq
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: faq
+  - action: utter_faq
 - story: predict disease
   steps:
   - intent: request_cvd_prediction
@@ -89,3 +95,14 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: faq
+  - action: utter_faq
+  - intent: faq
+  - action: utter_faq
+  - intent: faq
+  - action: utter_faq

@@ -1,39 +1,33 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - request_cvd_prediction
-  - inform_height
-  - inform_weight
-  - inform_systolic_blood_pressure
-  - inform_diastolic_blood_pressure
-  - inform_age
-  - inform_gender
-  - inform_cholesterol_level
-  - inform_glucose_level
-  - inform_drinks_alcohol
-  - inform_is_smoking
-  - inform_is_physically_active
-  - inform_level
-  - ask_normal_blood_pressure
-  - ask_blood_pressure_ranges
-  - ask_about_systolic_blood_pressure
-  - ask_about_diastolic_blood_pressure
-  - ask_about_heart_rate
-
+- affirm
+- bot_challenge
+- deny
+- faq:
+    is_retrieval_intent: true
+- goodbye
+- greet
+- inform_age
+- inform_cholesterol_level
+- inform_diastolic_blood_pressure
+- inform_drinks_alcohol
+- inform_gender
+- inform_glucose_level
+- inform_height
+- inform_is_physically_active
+- inform_is_smoking
+- inform_level
+- inform_systolic_blood_pressure
+- inform_weight
+- mood_great
+- mood_unhappy
+- request_cvd_prediction
 entities:
 - gender
 - number
 - level
 - boolean_entity
 - drinks_alcohol
-
 slots:
   age:
     type: float
@@ -44,8 +38,8 @@ slots:
     - type: from_entity
       entity: number
       conditions:
-        - active_loop: predict_cvd_form
-          requested_slot: age
+      - active_loop: predict_cvd_form
+        requested_slot: age
   height:
     type: float
     min_value: 100
@@ -55,8 +49,8 @@ slots:
     - type: from_entity
       entity: number
       conditions:
-        - active_loop: predict_cvd_form
-          requested_slot: height
+      - active_loop: predict_cvd_form
+        requested_slot: height
   weight:
     type: text
     influence_conversation: true
@@ -64,8 +58,8 @@ slots:
     - type: from_entity
       entity: number
       conditions:
-        - active_loop: predict_cvd_form
-          requested_slot: weight
+      - active_loop: predict_cvd_form
+        requested_slot: weight
   systolic_blood_pressure:
     type: float
     min_value: 100
@@ -75,8 +69,8 @@ slots:
     - type: from_entity
       entity: number
       conditions:
-        - active_loop: predict_cvd_form
-          requested_slot: systolic_blood_pressure
+      - active_loop: predict_cvd_form
+        requested_slot: systolic_blood_pressure
   diastolic_blood_pressure:
     type: float
     min_value: 40
@@ -86,8 +80,8 @@ slots:
     - type: from_entity
       entity: number
       conditions:
-        - active_loop: predict_cvd_form
-          requested_slot: diastolic_blood_pressure
+      - active_loop: predict_cvd_form
+        requested_slot: diastolic_blood_pressure
   gender:
     type: text
     influence_conversation: true
@@ -101,9 +95,9 @@ slots:
     type: categorical
     influence_conversation: true
     values:
-      - normal
-      - above normal
-      - well above normal
+    - normal
+    - above normal
+    - well above normal
     mappings:
     - type: from_entity
       entity: level
@@ -156,7 +150,7 @@ responses:
   utter_ask_diastolic_blood_pressure:
   - text: what is diastolic_blood_pressure?
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: Hey! How are you?
   utter_ask_age:
   - text: What is your age?
   utter_ask_gender:
@@ -168,96 +162,81 @@ responses:
   utter_ask_is_smoking:
   - text: Are you a smoker?
     buttons:
-    - payload: "True"
-      title: "True"
-    - payload: "False"
-      title: "False"
+    - payload: 'True'
+      title: 'True'
+    - payload: 'False'
+      title: 'False'
   utter_ask_drinks_alcohol:
   - text: Do you drink alcohol regularly?
     buttons:
-    - payload: "True"
-      title: "True"
-    - payload: "False"
-      title: "False"
-
+    - payload: 'True'
+      title: 'True'
+    - payload: 'False'
+      title: 'False'
   utter_ask_is_physically_active:
   - text: Are you an active person?
     buttons:
-    - payload: "True"
-      title: "True"
-    - payload: "False"
-      title: "False"
+    - payload: 'True'
+      title: 'True'
+    - payload: 'False'
+      title: 'False'
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_normal_blood_pressure_values:
-  - text: "Blood pressure numbers of less than 120/80 mmHg, that is less than 120 mmHg systolic and less than 80 mmHg diastolic,
-   are considered within the normal range. "
-  utter_blood_pressure_ranges:
-  - text: "The blood pressure categories are: \n
-  Normal, which means blood pressure numbers of less than 120/80 mmHg \n
-  Elevated, when readings consistently range from 120-129 systolic and less than 80 mm Hg diastolic. \n
-  Hypertension Stage 1, when blood pressure consistently ranges from 130-139 systolic or 80-89 mm Hg diastolic. \n
-  Hypertension Stage 2, when blood pressure consistently ranges at 140/90 mm Hg or higher \n
-  Hypertensive crisis, when blood pressure is higher than 180/120 mm Hg. \n
-  This stage of high blood pressure requires medical attention.
-  "
-
-  utter_what_is_systolic:
-  - text: "The systolic blood pressure indicates how much pressure your blood is exerting against your artery walls when the heart beats."
-
-  utter_what_is_diastolic:
-  - text: "The diastolic blood pressure indicates how much pressure your blood is exerting against your artery walls while the heart is resting between beats."
-  utter_normal_heart_rate:
-  - text: "A normal heart rate for adults is between 60 and 100 beats per minute (BPM), and varies based on age group and gender."
-
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_faq/ask_normal_blood_pressure_values:
+  - text: 'Blood pressure numbers of less than 120/80 mmHg, that is less than 120 mmHg systolic and less than 80 mmHg diastolic, are considered within the normal range. '
+  utter_faq/ask_blood_pressure_ranges:
+  - text: "
+      The blood pressure categories are: 
+       Normal, which means blood pressure numbers of less than 120/80 mmHg 
+       Elevated, when readings consistently range from 120-129 systolic and less than 80 mm Hg diastolic. 
+       Hypertension Stage 1, when blood pressure consistently ranges from 130-139 systolic or 80-89 mm Hg diastolic. 
+       Hypertension Stage 2, when blood pressure consistently ranges at 140/90 mm Hg or higher 
+       Hypertensive crisis, when blood pressure is higher than 180/120 mm Hg. 
+       This stage of high blood pressure requires medical attention. "
+  utter_faq/ask_about_systolic_blood_pressure:
+  - text: The systolic blood pressure indicates how much pressure your blood is exerting against your artery walls when the heart beats.
+  utter_faq/ask_about_diastolic_blood_pressure:
+  - text: The diastolic blood pressure indicates how much pressure your blood is exerting against your artery walls while the heart is resting between beats.
+  utter_faq/ask_about_heart_rate:
+  - text: A normal heart rate for adults is between 60 and 100 beats per minute (BPM), and varies based on age group and gender.
   utter_did_that_help:
-  - text: "Did that help you?"
-
+  - text: Did that help you?
   utter_happy:
-  - text: "Great, carry on!"
-
+  - text: Great, carry on!
   utter_goodbye:
-  - text: "Bye"
-
+  - text: Bye
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
+  - text: I am a bot, powered by Rasa.
 actions:
-- utter_ask_is_smoking
-- utter_ask_height
-- utter_ask_weight
-- utter_ask_systolic_blood_pressure
-- utter_ask_diastolic_blood_pressure
-- utter_ask_age
-- utter_ask_gender
-- utter_ask_cholesterol_level
-- utter_ask_glucose_level
-- utter_ask_drinks_alcohol
-- utter_ask_is_physically_active
-- utter_normal_blood_pressure_values
-- utter_blood_pressure_ranges
-- utter_what_is_systolic
-- utter_what_is_diastolic
-- utter_normal_heart_rate
 - extract_number
-
+- utter_ask_age
+- utter_ask_cholesterol_level
+- utter_ask_diastolic_blood_pressure
+- utter_ask_drinks_alcohol
+- utter_ask_gender
+- utter_ask_glucose_level
+- utter_ask_height
+- utter_ask_is_physically_active
+- utter_ask_is_smoking
+- utter_ask_systolic_blood_pressure
+- utter_ask_weight
+- utter_faq
+- utter_greet
 forms:
   predict_cvd_form:
     required_slots:
-      - cholesterol_level
-      - glucose_level
-      - drinks_alcohol
-      - is_smoking
-      - age
-      - gender
-      - height
-      - weight
-      - systolic_blood_pressure
-      - diastolic_blood_pressure
-      - is_physically_active
-
+    - cholesterol_level
+    - glucose_level
+    - drinks_alcohol
+    - is_smoking
+    - age
+    - gender
+    - height
+    - weight
+    - systolic_blood_pressure
+    - diastolic_blood_pressure
+    - is_physically_active
 session_config:
   session_expiration_time: 60
-  carry_over_slots_to_new_session: false
+  carry_over_slots_to_new_session: true
