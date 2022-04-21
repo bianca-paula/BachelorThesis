@@ -1,6 +1,10 @@
 version: "3.1"
 
 rules:
+- rule: Give advice
+  steps:
+    - intent: request_advice
+    - action: action_give_personalized_advice
 - rule: Respond to FAQs
   steps:
     - intent: faq
@@ -19,6 +23,7 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  - action: action_predict_heart_disease_risk
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye

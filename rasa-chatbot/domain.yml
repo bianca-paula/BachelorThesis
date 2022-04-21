@@ -22,6 +22,7 @@ intents:
 - mood_great
 - mood_unhappy
 - request_cvd_prediction
+- request_advice
 entities:
 - gender
 - number
@@ -209,6 +210,8 @@ responses:
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
 actions:
+- action_give_personalized_advice
+- action_predict_heart_disease_risk
 - extract_number
 - utter_ask_age
 - utter_ask_cholesterol_level

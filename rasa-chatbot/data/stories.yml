@@ -1,6 +1,10 @@
 version: "3.1"
 
 stories:
+- story: Request Advice
+  steps:
+  - intent: request_advice
+  - action: action_give_personalized_advice
 - story: Handle faq
   steps:
   - intent: greet
@@ -68,6 +72,7 @@ stories:
 
   - slot_was_set:
     - requested_slot: null
+  - action: action_predict_heart_disease_risk
 
 - story: happy path
   steps:

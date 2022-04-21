@@ -1,5 +1,9 @@
 version: "3.1"
 nlu:
+- intent: request_advice
+  examples: |
+    - Request advice
+    - Advice to prevent heart disease
 - intent: faq/ask_normal_blood_pressure
   examples: |
     - What is a normal blood pressure level?
