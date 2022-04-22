@@ -1,6 +1,10 @@
 version: "3.1"
 
 rules:
+- rule: Answer questions about osteopathy
+  steps:
+  - intent: ask_question
+  - action: action_answer_question
 - rule: Give advice
   steps:
     - intent: request_advice

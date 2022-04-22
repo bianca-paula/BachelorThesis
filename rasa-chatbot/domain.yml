@@ -1,5 +1,6 @@
 version: '3.1'
 intents:
+- ask_question
 - affirm
 - bot_challenge
 - deny
@@ -210,6 +211,7 @@ responses:
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
 actions:
+- action_answer_question
 - action_give_personalized_advice
 - action_predict_heart_disease_risk
 - extract_number

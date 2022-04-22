@@ -7,6 +7,16 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 #
+import re
+import wikipedia
+from pprint import pprint
+from haystack.document_stores import InMemoryDocumentStore, SQLDocumentStore
+from haystack.nodes import FARMReader, TransformersReader, TfidfRetriever
+from haystack.utils import convert_files_to_dicts,clean_wiki_text,fetch_archive_from_http, print_answers
+from haystack.pipelines import ExtractiveQAPipeline
+import logging
+import tempfile
+import requests
 import pickle
 import numpy as np
 import pandas as pd
@@ -30,26 +40,15 @@ from sklearn.model_selection import train_test_split, cross_val_score, GridSearc
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, ExtraTreesClassifier
 from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
+logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
+logger = logging.getLogger(__name__)
+def get_wikipedia_articles(data_dir, topics=[]):
+    for topic in topics:
+        article = wikipedia.page(pageid=topic).content
+        with open(f"{data_dir}/{topic}.txt", "w", encoding="utf-8") as f:
+            f.write(article)
 
 
-#D:\BachelorThesis\DiseasePredictionML\models\model_voting_classifier.sav
-
-# input_data = [{'gender':1,	'age_bin':5,	'BMI_Class':1,	'ap_hi':120,	'ap_lo':80,	'cholesterol':1, 'gluc':1,	'smoke':0,'alco':0,	'active':1, 'cardio':''}]
-# km_huang=pickle.load(open('./models/clusters_huang444.sav', 'rb'))
-# df_test= pd.DataFrame(input_data)
-# print(input_data)
-# print(df_test)
-# cluster=km_huang.predict(df_test)
-# print(cluster)
-#
-# df_test.drop('cardio', axis=1, inplace=True)
-# df_test.insert(0, 'Cluster', cluster, True)
-# print(df_test)
-# pred = loaded_random_forest_model.predict(df_test)
-# if pred == 0:
-#     print("Congratulations, You are out of risk of getting any cardiovascular disease.")
-# else:
-#     print("You are at risk of getting a cardiovascular disease. Please take care of yourself and just do regular check up of yours.")
 
 class ActionPredictHeartDiseaseRisk(Action):
 
@@ -250,15 +249,56 @@ class ActionGivePersonalizedAdvice(Action):
         return []
 
 
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
+class ActionAnswerQuestion(Action):
+    document_store = InMemoryDocumentStore()
+    topics = [36808, 57330, 3997, 512662, 625404, 249930, 60575]
+    retriever = TfidfRetriever(document_store=document_store)
+    reader = FARMReader(model_name_or_path="deepset/roberta-base-squad2", num_processes=1)
+    pipe = ExtractiveQAPipeline(reader, retriever)
+    data_dir = "D:/BachelorThesis/rasa-chatbot/actions/data"
+
+    def __init__(self) -> None:
+        logger.debug(f"Creating {self.name()} custom action ...")
+        logger.info(f"Saving wikipedia articles to {self.data_dir}")
+        get_wikipedia_articles(self.data_dir, topics=self.topics)
+
+        logger.info("Converting wikipedia articles to documents ...")
+        docs = convert_files_to_dicts(
+        dir_path=self.data_dir, clean_func=clean_wiki_text, split_paragraphs=True
+    )
+
+        logger.info("Writing documents to document store")
+        self.document_store.write_documents(docs)
+
+
+
+    def _get_answer(self, question):
+        prediction = self.pipe.run(
+            query=question, params={"Retriever": {"top_k": 10}, "Reader": {"top_k": 5}}
+        )
+        return prediction['answers'][0].answer
+
+    def name(self) -> Text:
+        return "action_answer_question"
+
+    def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+
+        question = tracker.latest_message["text"]
+        print("Type:")
+        print(type(question))
+        print(question)
+        print("Done!!")
+        r = self._get_answer(question)
+        cleaned_answer = re.sub("[@#$^~_+€™âăîțș]", "", r)
+
+
+        dispatcher.utter_message(text=cleaned_answer)
+
+        return []
+
+

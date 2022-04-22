@@ -1,5 +1,12 @@
 version: "3.1"
 nlu:
+- intent: ask_question
+  examples: |
+    - what is cardiac arrest?
+    - how many chambers does the heart have?
+    - what is blood?
+    - when does cardiac arrest happen?
+    - what are the symptoms of heart failure?
 - intent: request_advice
   examples: |
     - Request advice
