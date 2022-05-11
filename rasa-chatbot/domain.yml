@@ -1,11 +1,17 @@
 version: '3.1'
 intents:
-- ask_question
 - affirm
+- ask_question
 - bot_challenge
 - deny
 - faq:
     is_retrieval_intent: true
+    used_entities:
+    - boolean_entity
+    - drinks_alcohol
+    - gender
+    - level
+    - number
 - goodbye
 - greet
 - inform_age
@@ -22,13 +28,14 @@ intents:
 - inform_weight
 - mood_great
 - mood_unhappy
-- request_cvd_prediction
+- nlu_fallback
 - request_advice
+- request_cvd_prediction
 entities:
-- gender
-- number
-- level
 - boolean_entity
+- level
+- number
+- gender
 - drinks_alcohol
 slots:
   age:
@@ -109,6 +116,10 @@ slots:
   glucose_level:
     type: text
     influence_conversation: true
+    values:
+      - normal
+      - above normal
+      - well above normal
     mappings:
     - type: from_entity
       entity: level
@@ -159,8 +170,22 @@ responses:
   - text: What is your gender?
   utter_ask_cholesterol_level:
   - text: What is your cholesterol level?
+    buttons:
+      - payload: 'normal'
+        title: 'normal'
+      - payload: 'above normal'
+        title: 'above normal'
+      - payload: 'well above normal'
+        title: 'well above normal'
   utter_ask_glucose_level:
   - text: What is your glucose level?
+    buttons:
+      - payload: 'normal'
+        title: 'normal'
+      - payload: 'above normal'
+        title: 'above normal'
+      - payload: 'well above normal'
+        title: 'well above normal'
   utter_ask_is_smoking:
   - text: Are you a smoker?
     buttons:
@@ -188,14 +213,7 @@ responses:
   utter_faq/ask_normal_blood_pressure_values:
   - text: 'Blood pressure numbers of less than 120/80 mmHg, that is less than 120 mmHg systolic and less than 80 mmHg diastolic, are considered within the normal range. '
   utter_faq/ask_blood_pressure_ranges:
-  - text: "
-      The blood pressure categories are: 
-       Normal, which means blood pressure numbers of less than 120/80 mmHg 
-       Elevated, when readings consistently range from 120-129 systolic and less than 80 mm Hg diastolic. 
-       Hypertension Stage 1, when blood pressure consistently ranges from 130-139 systolic or 80-89 mm Hg diastolic. 
-       Hypertension Stage 2, when blood pressure consistently ranges at 140/90 mm Hg or higher 
-       Hypertensive crisis, when blood pressure is higher than 180/120 mm Hg. 
-       This stage of high blood pressure requires medical attention. "
+  - text: ' The blood pressure categories are: Normal, which means blood pressure numbers of less than 120/80 mmHg Elevated, when readings consistently range from 120-129 systolic and less than 80 mm Hg diastolic. Hypertension Stage 1, when blood pressure consistently ranges from 130-139 systolic or 80-89 mm Hg diastolic. Hypertension Stage 2, when blood pressure consistently ranges at 140/90 mm Hg or higher Hypertensive crisis, when blood pressure is higher than 180/120 mm Hg. This stage of high blood pressure requires medical attention. '
   utter_faq/ask_about_systolic_blood_pressure:
   - text: The systolic blood pressure indicates how much pressure your blood is exerting against your artery walls when the heart beats.
   utter_faq/ask_about_diastolic_blood_pressure:
@@ -211,10 +229,13 @@ responses:
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
 actions:
-- action_save_marker
 - action_answer_question
 - action_give_personalized_advice
 - action_predict_heart_disease_risk
+- action_save_marker
+- action_save_marker_found_advice_useful
+- action_save_marker_user_asked_faq
+- action_save_marker_user_began_conversation
 - extract_number
 - utter_ask_age
 - utter_ask_cholesterol_level
@@ -227,6 +248,7 @@ actions:
 - utter_ask_is_smoking
 - utter_ask_systolic_blood_pressure
 - utter_ask_weight
+- utter_did_that_help
 - utter_faq
 - utter_greet
 forms:

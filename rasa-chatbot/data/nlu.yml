@@ -50,6 +50,7 @@ nlu:
     - Predict heart disease
     - Is it possible that I have heart disease in the future?
     - Please predict the risk of having a heart disease
+    - Is it possible that I would have a heart disease in the future?
 - intent: inform_age
   examples: |
     - My age is [20](number)
@@ -58,6 +59,7 @@ nlu:
     - [41](number)
     - I am [40](number)
     - I am [22](number)
+    - I am [22](number) years old
 - intent: inform_systolic_blood_pressure
   examples: |
     - My usual systolic blood pressure is [129](number)
@@ -67,6 +69,8 @@ nlu:
     - Systolic is [122](number)
     - I normally have [121](number) systolic
     - Hmm, I am not sure, it usually is [120](number)
+    - systolic is [129](number)
+    - Systolic is [129](number)
 - intent: inform_diastolic_blood_pressure
   examples: |
     - My usual diastolic blood pressure is [50](number)
@@ -75,6 +79,8 @@ nlu:
     - [80](number)
     - Diastolic is [90](number) at highest
     - Diastolic is [90](number)
+    - diastolic is [80](number)
+    - Diastolic is [89](number)
 - intent: inform_height
   examples: |
     - My height is [165](number)
@@ -84,6 +90,8 @@ nlu:
     - Height is [170](number) cm
     - [185](number)
     - I have [177](number) cms
+    - Hmm, I think my height is [170](number) cm tall
+    - I have [168](number) cm
 - intent: inform_weight
   examples: |
     - My weight is [90](number)
@@ -93,6 +101,7 @@ nlu:
     - I have [70](number) kilograms
     - I've got [130](number) kg
     - [80](number)
+    - I have [87](number) kgs
 - intent: inform_gender
   examples: |
     - I am [female](gender)
@@ -104,6 +113,8 @@ nlu:
     - He is a [boy](gender)
     - She is a [girl](gender)
     - I am a [woman]{"entity": "gender", "value": "female"}
+    - I am a [female](gender)
+    - [male](gender)
 - intent: inform_level
   examples: |
     - Level is usually [well above normal](level)
@@ -115,6 +126,10 @@ nlu:
     - My cholesterol level is [normal](level)
     - Cholesterol level is [above normal](level)
     - Cholesterol is [well above normal](level)
+    - [normal](level)
+    - [above normal](level)
+    - [well above normal](level)
+    - Level is usually [well above normal](level)
 - intent: inform_is_smoking
   examples: |
     - [False](boolean_entity)
@@ -142,6 +157,8 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - Hello
+    - Hi
 - intent: goodbye
   examples: |
     - cu
@@ -209,6 +226,11 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+#- intent: nlu_fallback
+#  examples: |
+#    - [True](boolean_entity)
+#    - [False](boolean_entity)
+#    - [True](boolean_entity)
 - synonym: female
   examples: |
     - woman

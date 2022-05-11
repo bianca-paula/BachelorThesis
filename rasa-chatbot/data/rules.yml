@@ -1,14 +1,16 @@
 version: "3.1"
 
 rules:
-- rule: Answer questions about osteopathy
+- rule: Answer domain-related questions
   steps:
   - intent: ask_question
   - action: action_answer_question
+  - action: action_save_marker_user_asked_faq
 - rule: Give advice
   steps:
     - intent: request_advice
     - action: action_give_personalized_advice
+    - action: utter_did_that_help
 - rule: Respond to FAQs
   steps:
     - intent: faq
@@ -32,8 +34,20 @@ rules:
   steps:
   - intent: goodbye
   - action: utter_goodbye
+- rule: Say hello anytime the user says hello
+  steps:
+  - intent: greet
+  - action: action_save_marker_user_began_conversation
+  - action: utter_greet
+
 
 - rule: Say 'I am a bot' anytime the user challenges
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+- rule: save found advice useful marker
+  steps:
+  - action: action_give_personalized_advice
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: action_save_marker_found_advice_useful

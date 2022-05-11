@@ -45,6 +45,24 @@ logger = logging.getLogger(__name__)
 from datetime import datetime
 
 
+class ActionSaveMarker(Action):
+
+    def name(self) -> Text:
+        return "action_save_marker"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any], marker: str) -> List[Dict[Text, Any]]:
+
+        sender_id = tracker.current_state()['sender_id']
+        session_idx = tracker.idx_after_latest_restart()
+        add_marker_to_csv(sender_id,session_idx, marker)
+        print(sender_id)
+        return []
+
+
+save_marker = ActionSaveMarker()
+
 def add_marker_to_csv(sender_id, session_idx, marker):
     dateTimeObj = datetime.now()
     data={
@@ -112,17 +130,17 @@ def get_gender(gender):
         return 2
 
 def get_cholesterol_level(cholesterol_level):
-    if(cholesterol_level=='normal'):
+    if(cholesterol_level.lower()=='normal'):
         return 1
-    elif (cholesterol_level=='above normal'):
+    elif (cholesterol_level.lower()=='above normal'):
         return 2
     else:
         return 3
 
 def get_glucose_level(glucose_level):
-    if(glucose_level=='normal'):
+    if(glucose_level.lower()=='normal'):
         return 1
-    elif (glucose_level=='above normal'):
+    elif (glucose_level.lower()=='above normal'):
         return 2
     else:
         return 3
@@ -145,6 +163,16 @@ def get_is_physically_active(is_physically_active):
     else:
         return 0
 
+def get_blood_pressure_type(systolic, diastolic):
+    if(systolic < 90 or diastolic < 60):
+        return "low"
+    elif(systolic < 120 and diastolic < 80):
+        return "normal"
+    elif((systolic>= 120 and systolic <= 129) and diastolic<80):
+        return "elevated"
+    else:
+        return "hypertension"
+
 
 class ActionComputeStatistics(Action):
 
@@ -157,36 +185,35 @@ class ActionComputeStatistics(Action):
 
         return []
 
-class ActionSaveMarker_BeganConversation(Action):
 
+class ActionSave_BeganConversation(Action):
     def name(self) -> Text:
         return "action_save_marker_user_began_conversation"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any], marker: str) -> List[Dict[Text, Any]]:
-
-        sender_id = tracker.current_state()['sender_id']
-        session_idx = tracker.idx_after_latest_restart()
-        add_marker_to_csv(sender_id,session_idx, marker)
-        print(sender_id)
-        return []
-
-class ActionSave(Action):
-    def name(self) -> Text:
-        return "action_save_marker"
-
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        # sender_id = tracker.current_state()['sender_id']
-        # session_idx = tracker.idx_after_latest_restart()
-        # add_marker_to_csv(sender_id,session_idx, 'marker_user_began_conversation')
-        # print(sender_id)
-
-        ActionSaveMarker_BeganConversation.run(dispatcher, tracker,domain, "begin_convo")
+        save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_user_began_conversation")
         return []
+
+class ActionSave_FoundAdviceUseful(Action):
+    def name(self) -> Text:
+        return "action_save_marker_found_advice_useful"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_found_advice_useful")
+        return []
+
+class ActionSave_AskedFAQ(Action):
+    def name(self) -> Text:
+        return "action_save_marker_user_asked_faq"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_user_asked_faq")
+        return []
+
+
 
 
 class ActionPredictHeartDiseaseRisk(Action):
@@ -229,29 +256,40 @@ class ActionPredictHeartDiseaseRisk(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         sender_id = tracker.current_state()['sender_id']
         session_idx = tracker.idx_after_latest_restart()
-        add_marker_to_csv(sender_id,session_idx, 'marker_asked_for_cvd_prediction')
+        # add_marker_to_csv(sender_id,session_idx, 'marker_asked_for_cvd_prediction')
+        save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_asked_for_cvd_prediction")
         age = tracker.get_slot("age")
         gender = tracker.get_slot("gender")
         if (gender == 'female'):
-            add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_female')
+            # add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_female')
+            save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_cvd_prediction_user_female")
         else:
-            add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_male')
+            # add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_male')
+            save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_cvd_prediction_user_male")
         height = tracker.get_slot("height")
         weight = tracker.get_slot("weight")
-        systolic_blood_pressure = tracker.get_slot("systolic_blood_pressure")
-
-        diastolic_blood_pressure = tracker.get_slot("diastolic_blood_pressure")
+        systolic_blood_pressure = int(tracker.get_slot("systolic_blood_pressure"))
+        diastolic_blood_pressure = int(tracker.get_slot("diastolic_blood_pressure"))
+        blood_pressure_type= get_blood_pressure_type(systolic_blood_pressure, diastolic_blood_pressure)
+        marker_blood_pressure=f"marker_cvd_prediction_user_has_{blood_pressure_type}_bp"
+        save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker=marker_blood_pressure)
         glucose_level = tracker.get_slot("glucose_level")
         cholesterol_level = tracker.get_slot("cholesterol_level")
         drinks_alcohol = tracker.get_slot("drinks_alcohol")
         if(drinks_alcohol == 'True'):
-            add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_drinks_alcohol')
+            # add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_drinks_alcohol')
+            save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain,
+                            marker="marker_cvd_prediction_user_drinks_alcohol")
         is_smoking = tracker.get_slot("is_smoking")
         if(is_smoking == 'True'):
-            add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_is_smoking')
+            # add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_is_smoking')
+            save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain,
+                            marker="marker_cvd_prediction_user_is_smoking")
         is_physically_active = tracker.get_slot("is_physically_active")
         if (is_physically_active == 'True'):
-            add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_is_physically_active')
+            # add_marker_to_csv(sender_id,session_idx, 'marker_cvd_prediction_user_is_physically_active')
+            save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain,
+                            marker="marker_cvd_prediction_user_is_physically_active")
         patient_information={
             "age":age,
             "gender":gender,
@@ -267,10 +305,12 @@ class ActionPredictHeartDiseaseRisk(Action):
         }
         prediction = self.predict_risk(patient_information)
         if prediction == True:
-            add_marker_to_csv(sender_id, session_idx, 'marker_cvd_prediction_true')
+            # add_marker_to_csv(sender_id, session_idx, 'marker_cvd_prediction_true')
+            save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_cvd_prediction_true")
             dispatcher.utter_message("You are at risk of getting a cardiovascular disease. Please take care of yourself and just do regular check up of yours.")
         else:
-            add_marker_to_csv(sender_id, session_idx, 'marker_cvd_prediction_false')
+            # add_marker_to_csv(sender_id, session_idx, 'marker_cvd_prediction_false')
+            save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_cvd_prediction_false")
             dispatcher.utter_message("Congratulations, you are out of risk of getting any cardiovascular disease.")
 
 
@@ -336,12 +376,31 @@ class ActionGivePersonalizedAdvice(Action):
             advice="Please know that cardiovascular diseases are most common in people over 50 and your risk of developing them increases as you get older."
 
         return advice
-    def give_recommendation_user_systolic_blood_pressure(self):
-        pass
-    def give_recommendation_user_diastolic_blood_pressure(self):
-        pass
-    def give_recommendation_user_blood_pressure(self):
-        pass
+    # def give_recommendation_user_systolic_blood_pressure(self):
+    #     pass
+    # def give_recommendation_user_diastolic_blood_pressure(self):
+    #     pass
+    # https: // www.webmd.com / heart / understanding - low - blood - pressure - treatment
+    # https: // www.mayoclinic.org / diseases - conditions / prehypertension / diagnosis - treatment / drc - 20376708
+    def give_recommendation_user_blood_pressure(self, blood_pressure_type):
+        advice = ""
+        if (blood_pressure_type == "low"):
+            advice = "Since you have a low blood pressure, please make sure" \
+                     "to eat a diet higher in salt, drink lots of nonalcoholic fluids," \
+                     "check with your doctor to see if any medication you take are causing this," \
+                     "try eating smaller, more frequent meals and, if needed, use compression stockings to keep more blood in the upper body"
+        elif (blood_pressure_type == "normal"):
+            advice = "Your blood pressure is normal, so please keep up a healthy lifestyle."
+        elif (blood_pressure_type == "elevated"):
+            advice= "As your blood pressure level is elevated, you need to change your lifestyle in order to reduce and keep it under control." \
+                    "Please make sure to eat healthy foods, maintain a healthy weight," \
+                    "use less salt in your diet, increase your physical activity and manage stress."
+        else:
+            advice="Your blood pressure levels indicate that you have hypertension." \
+                   "Your doctor can help you keep your blood pressure to a safe level using medicines and lifestyle changes." \
+                   "Talk to your doctor to help you decide about treatment." \
+                   ""
+        return advice
 
     # https: // www.nhs.uk / conditions / high - blood - sugar - hyperglycaemia /
     def give_recommendation_user_glucose_level(self, glucose_level):
@@ -373,13 +432,15 @@ class ActionGivePersonalizedAdvice(Action):
 
         session_idx = tracker.idx_after_latest_restart()
 
-        add_marker_to_csv(sender_id,session_idx,'marker_asked_for_advice')
+        # add_marker_to_csv(sender_id,session_idx,'marker_asked_for_advice')
+        save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_asked_for_advice")
         age = tracker.get_slot("age")
         gender = tracker.get_slot("gender")
         height = tracker.get_slot("height")
         weight = tracker.get_slot("weight")
-        systolic_blood_pressure = tracker.get_slot("systolic_blood_pressure")
-        diastolic_blood_pressure = tracker.get_slot("diastolic_blood_pressure")
+        systolic_blood_pressure = int(tracker.get_slot("systolic_blood_pressure"))
+        diastolic_blood_pressure = int(tracker.get_slot("diastolic_blood_pressure"))
+        blood_pressure_type= get_blood_pressure_type(systolic_blood_pressure, diastolic_blood_pressure)
         glucose_level = tracker.get_slot("glucose_level")
         cholesterol_level = tracker.get_slot("cholesterol_level")
         drinks_alcohol = tracker.get_slot("drinks_alcohol")
@@ -390,6 +451,7 @@ class ActionGivePersonalizedAdvice(Action):
         # bmi=calculate_bmi(height, weight)
 
         dispatcher.utter_message(self.give_recommendation_user_bmi(height, weight))
+        dispatcher.utter_message(self.give_recommendation_user_blood_pressure(blood_pressure_type))
         dispatcher.utter_message(self.give_recommendation_user_is_smoking(is_smoking))
         dispatcher.utter_message(self.give_recommendation_user_cholesterol_level(cholesterol_level))
         dispatcher.utter_message(self.give_recommendation_user_glucose_level(glucose_level))
