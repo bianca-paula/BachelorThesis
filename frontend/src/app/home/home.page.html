@@ -1,10 +1,10 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Blank
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -12,15 +12,25 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
-  <p>aaaa</p>
-  <!-- <div class="chat-container"></div> -->
   <div id="rasa-chat-widget" data-websocket-url="http://localhost:5005/"></div>
-    
-  <!-- <div id="rasa-chat-widget" data-websocket-url="http://localhost:5005"></div> -->
-  <!-- <div id="container">
-    <strong>Ready to create an app?</strong>
-
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div> -->
   <script src="RasaWidget.js"></script>
+  <ion-card style="border-radius:30px !important; background-color: cornflowerblue; margin-left: 2em;
+  margin-right: 2em; margin-top:4em; margin-bottom: 4em;
+  ">
+    <ion-card-header>
+      Card Header
+    </ion-card-header>
+    <ion-card-content>
+      <img src="../../assets/images/chatbot-picture.png" alt="Chatbot picture" height="400" width="auto" style="display: block;
+      margin-left: auto;
+      margin-right: auto;" >
+      <a href='https://pngtree.com/so/Future'>Future png from pngtree.com/</a>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

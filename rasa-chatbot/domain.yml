@@ -211,6 +211,7 @@ responses:
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
 actions:
+- action_save_marker
 - action_answer_question
 - action_give_personalized_advice
 - action_predict_heart_disease_risk
@@ -231,16 +232,16 @@ actions:
 forms:
   predict_cvd_form:
     required_slots:
-    - cholesterol_level
-    - glucose_level
-    - drinks_alcohol
-    - is_smoking
     - age
     - gender
     - height
     - weight
     - systolic_blood_pressure
     - diastolic_blood_pressure
+    - cholesterol_level
+    - glucose_level
+    - drinks_alcohol
+    - is_smoking
     - is_physically_active
 session_config:
   session_expiration_time: 60

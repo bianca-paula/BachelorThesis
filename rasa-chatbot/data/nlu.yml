@@ -7,6 +7,7 @@ nlu:
     - what is blood?
     - when does cardiac arrest happen?
     - what are the symptoms of heart failure?
+    - what important functions does blood perform within the body?
 - intent: request_advice
   examples: |
     - Request advice

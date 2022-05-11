@@ -1,10 +1,24 @@
 rasa-chatbot/.rasa/
 rasa-chatbot/.idea/
 rasa-chatbot/models/
-ChatbotRPS/.rasa/
-ChatbotRPS/.idea/
-ChatbotRPS/models/
-ChatbotRPS/results/
-DiseasePredictionML/learn
+ChatbotRPS
+DiseasePredictionML
 frontend2
 Ionic
+archive
+slider
+new dataset
+MedicalChatbot2
+medical-chatbot
+haystack-server
+haystack
+frontend
+drugdata
+django-haystack
+demo-pictures
+chatbot-application
+rasa-chatbot/mlruns
+some links.txt
+some other links.txt
+text.txt
+archive.zip

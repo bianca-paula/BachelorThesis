@@ -1,0 +1,98 @@
+[
+  {
+    "text": "125",
+    "intent": "inform_systolic_blood_pressure",
+    "intent_prediction": {
+      "name": "inform_age",
+      "confidence": 0.28486722707748413
+    }
+  },
+  {
+    "text": "I usually have 60",
+    "intent": "inform_diastolic_blood_pressure",
+    "intent_prediction": {
+      "name": "inform_systolic_blood_pressure",
+      "confidence": 0.5418667197227478
+    }
+  },
+  {
+    "text": "It is 70",
+    "intent": "inform_diastolic_blood_pressure",
+    "intent_prediction": {
+      "name": "inform_systolic_blood_pressure",
+      "confidence": 0.542630136013031
+    }
+  },
+  {
+    "text": "80",
+    "intent": "inform_diastolic_blood_pressure",
+    "intent_prediction": {
+      "name": "inform_age",
+      "confidence": 0.28486722707748413
+    }
+  },
+  {
+    "text": "I am 100",
+    "intent": "inform_height",
+    "intent_prediction": {
+      "name": "inform_age",
+      "confidence": 0.7382743954658508
+    }
+  },
+  {
+    "text": "185",
+    "intent": "inform_height",
+    "intent_prediction": {
+      "name": "inform_age",
+      "confidence": 0.28486722707748413
+    }
+  },
+  {
+    "text": "I am 60",
+    "intent": "inform_weight",
+    "intent_prediction": {
+      "name": "inform_age",
+      "confidence": 0.7382743954658508
+    }
+  },
+  {
+    "text": "80",
+    "intent": "inform_weight",
+    "intent_prediction": {
+      "name": "inform_age",
+      "confidence": 0.28486722707748413
+    }
+  },
+  {
+    "text": "False",
+    "intent": "inform_is_smoking",
+    "intent_prediction": {
+      "name": "inform_drinks_alcohol",
+      "confidence": 0.3992469012737274
+    }
+  },
+  {
+    "text": "True",
+    "intent": "inform_is_smoking",
+    "intent_prediction": {
+      "name": "inform_is_physically_active",
+      "confidence": 0.5614621043205261
+    }
+  },
+  {
+    "text": "True",
+    "intent": "inform_drinks_alcohol",
+    "intent_prediction": {
+      "name": "inform_is_physically_active",
+      "confidence": 0.5614621043205261
+    }
+  },
+  {
+    "text": "False",
+    "intent": "inform_is_physically_active",
+    "intent_prediction": {
+      "name": "inform_drinks_alcohol",
+      "confidence": 0.3992469012737274
+    }
+  }
+]

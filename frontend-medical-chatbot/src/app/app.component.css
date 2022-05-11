@@ -1,0 +1,18 @@
+.navbar-nav {
+    margin-left: auto;
+}
+
+
+.nav-item{
+    padding-left: 2em;
+}
+
+.navbar .navbar-nav .nav-link {
+    font-size: 1.1em;
+    border-radius: 5px;
+}
+.navbar .navbar-nav .nav-link:hover {
+  background-color: #e7e7e7;
+  color: #fff;
+  border-radius: 5px;
+}
