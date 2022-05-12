@@ -114,12 +114,12 @@ slots:
       - active_loop: predict_cvd_form
         requested_slot: cholesterol_level
   glucose_level:
-    type: text
+    type: categorical
     influence_conversation: true
     values:
-      - normal
-      - above normal
-      - well above normal
+    - normal
+    - above normal
+    - well above normal
     mappings:
     - type: from_entity
       entity: level
@@ -171,21 +171,21 @@ responses:
   utter_ask_cholesterol_level:
   - text: What is your cholesterol level?
     buttons:
-      - payload: 'normal'
-        title: 'normal'
-      - payload: 'above normal'
-        title: 'above normal'
-      - payload: 'well above normal'
-        title: 'well above normal'
+    - payload: normal
+      title: normal
+    - payload: above normal
+      title: above normal
+    - payload: well above normal
+      title: well above normal
   utter_ask_glucose_level:
   - text: What is your glucose level?
     buttons:
-      - payload: 'normal'
-        title: 'normal'
-      - payload: 'above normal'
-        title: 'above normal'
-      - payload: 'well above normal'
-        title: 'well above normal'
+    - payload: normal
+      title: normal
+    - payload: above normal
+      title: above normal
+    - payload: well above normal
+      title: well above normal
   utter_ask_is_smoking:
   - text: Are you a smoker?
     buttons:

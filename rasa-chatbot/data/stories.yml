@@ -256,3 +256,11 @@ stories:
   - action: utter_did_that_help
   - intent: affirm
   - action: action_save_marker_found_advice_useful
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: action_save_marker_user_began_conversation
+  - action: utter_greet
+  - intent: ask_question
+  - action: action_answer_question

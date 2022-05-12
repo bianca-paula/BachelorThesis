@@ -43,6 +43,8 @@ from sklearn.model_selection import train_test_split, cross_val_score, GridSearc
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")
 logger = logging.getLogger(__name__)
 from datetime import datetime
+from haystack.nodes import EmbeddingRetriever
+from haystack.document_stores.faiss import FAISSDocumentStore
 
 
 class ActionSaveMarker(Action):
@@ -463,25 +465,35 @@ class ActionGivePersonalizedAdvice(Action):
 
 
 class ActionAnswerQuestion(Action):
-    document_store = InMemoryDocumentStore()
-    topics = [36808, 57330, 3997, 512662, 625404, 249930, 60575]
-    retriever = TfidfRetriever(document_store=document_store)
+    # document_store = InMemoryDocumentStore()
+    # document_store = FAISSDocumentStore(faiss_index_factory_str="Flat", sql_url="sqlite:///faiss_document_store.db")
+    document_store = FAISSDocumentStore.load(index_path="testfile_path.index")
+    # topics = [36808, 57330, 3997, 512662, 625404, 249930, 60575]
+    # retriever = TfidfRetriever(document_store=document_store)
+    retriever = EmbeddingRetriever(
+        document_store=document_store,
+        embedding_model="sentence-transformers/multi-qa-mpnet-base-dot-v1",
+        model_format="sentence_transformers"
+    )
+
     reader = FARMReader(model_name_or_path="deepset/roberta-base-squad2", num_processes=1)
     pipe = ExtractiveQAPipeline(reader, retriever)
-    data_dir = "D:/BachelorThesis/rasa-chatbot/actions/data"
+    # data_dir = "D:/BachelorThesis/rasa-chatbot/actions/data"
 
     def __init__(self) -> None:
         logger.debug(f"Creating {self.name()} custom action ...")
-        logger.info(f"Saving wikipedia articles to {self.data_dir}")
-        get_wikipedia_articles(self.data_dir, topics=self.topics)
+        # logger.info(f"Saving wikipedia articles to {self.data_dir}")
+        # get_wikipedia_articles(self.data_dir, topics=self.topics)
 
         logger.info("Converting wikipedia articles to documents ...")
-        docs = convert_files_to_dicts(
-        dir_path=self.data_dir, clean_func=clean_wiki_text, split_paragraphs=True
-    )
+    #     docs = convert_files_to_dicts(
+    #     dir_path=self.data_dir, clean_func=clean_wiki_text, split_paragraphs=True
+    # )
 
         logger.info("Writing documents to document store")
-        self.document_store.write_documents(docs)
+        # self.document_store.write_documents(docs)
+        # self.document_store.update_embeddings(self.retriever)
+        # self.document_store.save("testfile_path.index")
 
 
 

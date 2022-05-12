@@ -8,6 +8,7 @@ nlu:
     - when does cardiac arrest happen?
     - what are the symptoms of heart failure?
     - what important functions does blood perform within the body?
+    - What are common causes of heart failure?
 - intent: request_advice
   examples: |
     - Request advice
@@ -114,7 +115,6 @@ nlu:
     - She is a [girl](gender)
     - I am a [woman]{"entity": "gender", "value": "female"}
     - I am a [female](gender)
-    - [male](gender)
 - intent: inform_level
   examples: |
     - Level is usually [well above normal](level)
@@ -129,7 +129,6 @@ nlu:
     - [normal](level)
     - [above normal](level)
     - [well above normal](level)
-    - Level is usually [well above normal](level)
 - intent: inform_is_smoking
   examples: |
     - [False](boolean_entity)
@@ -226,11 +225,6 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-#- intent: nlu_fallback
-#  examples: |
-#    - [True](boolean_entity)
-#    - [False](boolean_entity)
-#    - [True](boolean_entity)
 - synonym: female
   examples: |
     - woman
