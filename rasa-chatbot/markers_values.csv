@@ -1,16 +1,10 @@
-83e633cf2daa4e0bb743364227758876,0,marker_asked_for_cvd_prediction,2022-05-11 19:00:09.571097
-83e633cf2daa4e0bb743364227758876,0,marker_cvd_prediction_user_male,2022-05-11 19:00:09.574097
-83e633cf2daa4e0bb743364227758876,0,marker_cvd_prediction_user_has_hypertension_bp,2022-05-11 19:00:09.577090
-83e633cf2daa4e0bb743364227758876,0,marker_cvd_prediction_user_drinks_alcohol,2022-05-11 19:00:09.578124
-83e633cf2daa4e0bb743364227758876,0,marker_cvd_prediction_user_is_smoking,2022-05-11 19:00:09.580931
-83e633cf2daa4e0bb743364227758876,0,marker_cvd_prediction_user_is_physically_active,2022-05-11 19:00:09.582010
-83e633cf2daa4e0bb743364227758876,0,marker_cvd_prediction_false,2022-05-11 19:00:10.059169
-83e633cf2daa4e0bb743364227758876,0,marker_asked_for_advice,2022-05-11 19:02:14.898285
-83e633cf2daa4e0bb743364227758876,0,marker_found_advice_useful,2022-05-11 19:02:23.462345
-f397ea9af72b40119acd7459bf1a0152,0,marker_user_began_conversation,2022-05-11 19:15:57.252180
-92972f2639e848e89a751414ff1ec3da,0,marker_user_began_conversation,2022-05-13 00:10:37.093404
-7d825e95ac7a493d80466d09824c284f,0,marker_user_began_conversation,2022-05-13 00:15:31.024054
-7d825e95ac7a493d80466d09824c284f,0,marker_user_asked_faq,2022-05-13 00:16:00.149511
-c2597339c11a48598918da8cc5628557,0,marker_user_began_conversation,2022-05-13 00:39:09.219861
-c2597339c11a48598918da8cc5628557,0,marker_user_asked_faq,2022-05-13 00:39:48.111459
-c2597339c11a48598918da8cc5628557,0,marker_user_asked_faq,2022-05-13 00:40:49.991810
+sender_id,session_idx,marker,timestamp
+
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-05-16 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_user_asked_faq,2022-05-16 00:42:34.142628
+cda78fb6114248268d67af3afbad4950,0,marker_asked_for_cvd_prediction,2022-05-16 00:43:26.804879
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_female,2022-05-16 00:43:27.165844
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_has_hypertension_bp,2022-05-16 00:43:27.304838
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_drinks_alcohol,2022-05-16 00:43:27.446842
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_physically_active,2022-05-16 00:43:27.637875
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_false,2022-05-16 00:43:28.451840

@@ -8,6 +8,8 @@
 # This is a simple example for a custom action which utters "Hello World!"
 #
 import re
+
+import rasa_sdk
 import wikipedia
 from pprint import pprint
 from haystack.document_stores import InMemoryDocumentStore, SQLDocumentStore
@@ -23,6 +25,7 @@ import pandas as pd
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
+from rasa_sdk.events import FollowupAction
 from rasa_sdk.executor import CollectingDispatcher
 
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
@@ -46,6 +49,40 @@ from datetime import datetime
 from haystack.nodes import EmbeddingRetriever
 from haystack.document_stores.faiss import FAISSDocumentStore
 
+from compute_statistics.statistics import Statistics
+
+def compute():
+    statistics = Statistics(path="D:/BachelorThesis/rasa-chatbot/markers_values.csv")
+    statistics.compute_statistics_gender_ratio()
+    statistics.compute_statistics_cvd_prediction_ratio()
+    statistics.compute_statistics_users_habits()
+    statistics.compute_statistics_users_blood_pressure()
+    statistics.compute_statistics_user_responses_by_month()
+    statistics.compute_statistics_users_asked_faq()
+    statistics.compute_statistics_users_asked_for_cvd_prediction()
+    statistics.compute_statistics_users_found_advice_useful()
+
+# class ActionComputeStatistics(Action):
+#
+#     def name(self) -> Text:
+#         return "action_compute_statistics"
+#
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         statistics = Statistics(path="D:/BachelorThesis/rasa-chatbot/markers_values.csv")
+#         statistics.compute_statistics_gender_ratio()
+#         statistics.compute_statistics_cvd_prediction_ratio()
+#         statistics.compute_statistics_users_habits()
+#         statistics.compute_statistics_users_blood_pressure()
+#         statistics.compute_statistics_user_responses_by_month()
+#         statistics.compute_statistics_users_asked_faq()
+#         statistics.compute_statistics_users_asked_for_cvd_prediction()
+#         statistics.compute_statistics_users_found_advice_useful()
+#
+#
+#         return []
+
 
 class ActionSaveMarker(Action):
 
@@ -59,7 +96,6 @@ class ActionSaveMarker(Action):
         sender_id = tracker.current_state()['sender_id']
         session_idx = tracker.idx_after_latest_restart()
         add_marker_to_csv(sender_id,session_idx, marker)
-        print(sender_id)
         return []
 
 
@@ -78,6 +114,7 @@ def add_marker_to_csv(sender_id, session_idx, marker):
 
     # append data frame to CSV file
     df.to_csv('markers_values.csv', mode='a', index=False, header=False)
+    compute_statistics(marker)
 
 def get_wikipedia_articles(data_dir, topics=[]):
     for topic in topics:
@@ -176,17 +213,6 @@ def get_blood_pressure_type(systolic, diastolic):
         return "hypertension"
 
 
-class ActionComputeStatistics(Action):
-
-    def name(self) -> Text:
-        return "action_compute_statistics"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        return []
-
 
 class ActionSave_BeganConversation(Action):
     def name(self) -> Text:
@@ -204,8 +230,32 @@ class ActionSave_FoundAdviceUseful(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_found_advice_useful")
+
         return []
 
+
+def compute_statistics(marker):
+    statistics = Statistics(path="D:/BachelorThesis/rasa-chatbot/markers_values.csv")
+    if(marker=="marker_user_asked_faq"):
+        statistics.compute_statistics_users_asked_faq()
+    elif(marker=="marker_asked_for_advice" or marker=="marker_found_advice_useful"):
+        statistics.compute_statistics_users_found_advice_useful()
+    elif(marker=="marker_asked_for_cvd_prediction"):
+        statistics.compute_statistics_users_asked_for_cvd_prediction()
+        statistics.compute_statistics_user_responses_by_month()
+    elif(marker=="marker_user_began_conversation"):
+        statistics.compute_statistics_users_asked_for_cvd_prediction()
+    elif(marker=="marker_cvd_prediction_user_female" or marker=="marker_cvd_prediction_user_male"):
+        statistics.compute_statistics_gender_ratio()
+    elif(marker=="marker_cvd_prediction_false" or marker=="marker_cvd_prediction_true" ):
+        statistics.compute_statistics_cvd_prediction_ratio()
+    elif(marker=="marker_cvd_prediction_user_drinks_alcohol" or marker=="marker_cvd_prediction_user_is_smoking" or marker=="marker_cvd_prediction_user_is_physically_active"):
+        statistics.compute_statistics_users_habits()
+    elif(marker=="marker_cvd_prediction_user_has_low_bp" or marker=="marker_cvd_prediction_user_has_normal_bp" or marker=="marker_cvd_prediction_user_has_elevated_bp"or marker=="marker_cvd_prediction_user_has_hypertension_bp"):
+        statistics.compute_statistics_users_blood_pressure()
+
+    else:
+        pass
 class ActionSave_AskedFAQ(Action):
     def name(self) -> Text:
         return "action_save_marker_user_asked_faq"
@@ -260,6 +310,7 @@ class ActionPredictHeartDiseaseRisk(Action):
         session_idx = tracker.idx_after_latest_restart()
         # add_marker_to_csv(sender_id,session_idx, 'marker_asked_for_cvd_prediction')
         save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_asked_for_cvd_prediction")
+        # statistics.compute_statistics_users_asked_for_cvd_prediction()
         age = tracker.get_slot("age")
         gender = tracker.get_slot("gender")
         if (gender == 'female'):
@@ -314,6 +365,14 @@ class ActionPredictHeartDiseaseRisk(Action):
             # add_marker_to_csv(sender_id, session_idx, 'marker_cvd_prediction_false')
             save_marker.run(dispatcher=dispatcher, tracker=tracker, domain=domain, marker="marker_cvd_prediction_false")
             dispatcher.utter_message("Congratulations, you are out of risk of getting any cardiovascular disease.")
+
+        # statistics.compute_statistics_gender_ratio()
+        # statistics.compute_statistics_users_habits()
+        # statistics.compute_statistics_users_blood_pressure()
+        # statistics.compute_statistics_cvd_prediction_ratio()
+        # statistics.compute_statistics_user_responses_by_month()
+        # stats = ActionComputeStatistics()
+        # stats.run(dispatcher=dispatcher, tracker=tracker, domain=domain)
 
 
         return []
@@ -520,8 +579,6 @@ class ActionAnswerQuestion(Action):
         print("Done!!")
         r = self._get_answer(question)
         cleaned_answer = re.sub("[@#$^~_+€™âăîțș]", "", r)
-
-
         dispatcher.utter_message(text=cleaned_answer)
 
         return []

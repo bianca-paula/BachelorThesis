@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { UserExperienceComponent } from './user-experience/user-experience.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    UserExperienceComponent
   ],
   imports: [
     BrowserModule,
