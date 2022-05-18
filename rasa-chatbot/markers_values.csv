@@ -8,3 +8,14 @@ cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_has_hypertension_b
 cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_drinks_alcohol,2022-05-16 00:43:27.446842
 cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_physically_active,2022-05-16 00:43:27.637875
 cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_false,2022-05-16 00:43:28.451840
+e576cf9c179d46d6bfa6fa1653b43156,0,marker_user_began_conversation,2022-05-18 10:03:17.350475
+7770ad18f1c84cffbb4856c310731f09,0,marker_user_began_conversation,2022-05-18 10:41:05.544824
+d2b3a217cd16492baca27240f776322e,0,marker_user_began_conversation,2022-05-18 10:52:05.115784
+62274b6caf2e45e3ad7a42ef8671b122,0,marker_user_began_conversation,2022-05-18 11:43:31.517418
+62274b6caf2e45e3ad7a42ef8671b122,0,marker_asked_for_cvd_prediction,2022-05-18 11:54:45.952327
+62274b6caf2e45e3ad7a42ef8671b122,0,marker_cvd_prediction_user_female,2022-05-18 11:54:46.537793
+62274b6caf2e45e3ad7a42ef8671b122,0,marker_cvd_prediction_user_has_elevated_bp,2022-05-18 11:54:46.676804
+62274b6caf2e45e3ad7a42ef8671b122,0,marker_cvd_prediction_user_drinks_alcohol,2022-05-18 11:54:46.858755
+62274b6caf2e45e3ad7a42ef8671b122,0,marker_cvd_prediction_false,2022-05-18 11:54:48.126991
+62274b6caf2e45e3ad7a42ef8671b122,0,marker_asked_for_advice,2022-05-18 11:56:05.514652
+62274b6caf2e45e3ad7a42ef8671b122,0,marker_found_advice_useful,2022-05-18 11:57:46.855684

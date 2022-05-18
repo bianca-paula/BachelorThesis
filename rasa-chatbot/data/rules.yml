@@ -1,6 +1,23 @@
 version: "3.1"
 
 rules:
+
+- rule: Would like advice
+  steps:
+  - action: action_predict_heart_disease_risk
+  - action: utter_would_like_advice
+  - intent: affirm
+  - action: action_give_personalized_advice
+  - action: utter_did_that_help
+
+- rule: Would not like advice
+  steps:
+  - action: action_predict_heart_disease_risk
+  - action: utter_would_like_advice
+  - intent: deny
+  - action: utter_goodbye
+
+
 - rule: Answer domain-related questions
   steps:
   - intent: ask_question
@@ -11,10 +28,12 @@ rules:
     - intent: request_advice
     - action: action_give_personalized_advice
     - action: utter_did_that_help
+
 - rule: Respond to FAQs
   steps:
     - intent: faq
     - action: utter_faq
+
 - rule: Activate Predict Disease Form
   steps:
   - intent: request_cvd_prediction
@@ -30,6 +49,8 @@ rules:
   - slot_was_set:
     - requested_slot: null
   - action: action_predict_heart_disease_risk
+  - action: utter_would_like_advice
+
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye

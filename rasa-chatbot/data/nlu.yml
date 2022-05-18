@@ -1,5 +1,16 @@
 version: "3.1"
 nlu:
+- intent: faq/ask_what_can_you_do
+  examples: |
+    - How can you help me?
+    - What can you do for me?
+    - What are you programmed to do?
+- intent: ask_domain_related_question
+  examples: |
+    - Ask a domain related question
+    - I want to ask you a domain related question
+    - I want to ask a question about heart
+    - I want to ask a question about cardiology
 - intent: ask_question
   examples: |
     - what is cardiac arrest?
@@ -13,6 +24,7 @@ nlu:
   examples: |
     - Request advice
     - Advice to prevent heart disease
+    - Give personalized advice
 - intent: faq/ask_normal_blood_pressure
   examples: |
     - What is a normal blood pressure level?
@@ -61,6 +73,7 @@ nlu:
     - I am [40](number)
     - I am [22](number)
     - I am [22](number) years old
+    - [60](number) years
 - intent: inform_systolic_blood_pressure
   examples: |
     - My usual systolic blood pressure is [129](number)
@@ -72,6 +85,7 @@ nlu:
     - Hmm, I am not sure, it usually is [120](number)
     - systolic is [129](number)
     - Systolic is [129](number)
+    - It is [129](number)
 - intent: inform_diastolic_blood_pressure
   examples: |
     - My usual diastolic blood pressure is [50](number)
@@ -82,6 +96,7 @@ nlu:
     - Diastolic is [90](number)
     - diastolic is [80](number)
     - Diastolic is [89](number)
+    - Usual diastolic is [60](number)
 - intent: inform_height
   examples: |
     - My height is [165](number)
@@ -93,6 +108,7 @@ nlu:
     - I have [177](number) cms
     - Hmm, I think my height is [170](number) cm tall
     - I have [168](number) cm
+    - [170](number) cm
 - intent: inform_weight
   examples: |
     - My weight is [90](number)
@@ -103,6 +119,7 @@ nlu:
     - I've got [130](number) kg
     - [80](number)
     - I have [87](number) kgs
+    - [70](number) kgs
 - intent: inform_gender
   examples: |
     - I am [female](gender)
@@ -115,6 +132,7 @@ nlu:
     - She is a [girl](gender)
     - I am a [woman]{"entity": "gender", "value": "female"}
     - I am a [female](gender)
+    - [woman]{"entity": "gender", "value": "female"}
 - intent: inform_level
   examples: |
     - Level is usually [well above normal](level)
@@ -129,10 +147,14 @@ nlu:
     - [normal](level)
     - [above normal](level)
     - [well above normal](level)
+    - [well above normal](level)
+    - [above normal](level)
 - intent: inform_is_smoking
   examples: |
     - [False](boolean_entity)
     - [True](boolean_entity)
+    - [True](boolean_entity)
+    - [False](boolean_entity)
 - intent: inform_drinks_alcohol
   examples: |
     - [False](boolean_entity)
@@ -178,6 +200,7 @@ nlu:
     - of course
     - that sounds good
     - correct
+    - Yes
 - intent: deny
   examples: |
     - no

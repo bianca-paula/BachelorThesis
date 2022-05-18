@@ -1,6 +1,66 @@
 version: "3.1"
 
 stories:
+
+- story: interactive_story_2
+  steps:
+  - intent: greet
+  - action: action_save_marker_user_began_conversation
+  - action: utter_greet
+  - intent: request_cvd_prediction
+  - action: predict_cvd_form
+  - active_loop: predict_cvd_form
+  - slot_was_set:
+    - requested_slot: age
+  - slot_was_set:
+    - age: '30'
+  - slot_was_set:
+    - requested_slot: gender
+  - slot_was_set:
+    - gender: female
+  - slot_was_set:
+    - requested_slot: height
+  - slot_was_set:
+    - height: '170'
+  - slot_was_set:
+    - requested_slot: weight
+  - slot_was_set:
+    - weight: '100'
+  - slot_was_set:
+    - requested_slot: systolic_blood_pressure
+  - slot_was_set:
+    - systolic_blood_pressure: '129'
+  - slot_was_set:
+    - requested_slot: diastolic_blood_pressure
+  - slot_was_set:
+    - diastolic_blood_pressure: '80'
+  - slot_was_set:
+    - requested_slot: cholesterol_level
+  - slot_was_set:
+    - cholesterol_level: normal
+  - slot_was_set:
+    - requested_slot: glucose_level
+  - slot_was_set:
+    - glucose_level: above normal
+  - slot_was_set:
+    - requested_slot: drinks_alcohol
+  - slot_was_set:
+    - drinks_alcohol: 'True'
+  - slot_was_set:
+    - requested_slot: is_smoking
+  - slot_was_set:
+    - is_smoking: 'False'
+  - slot_was_set:
+    - requested_slot: is_physically_active
+  - slot_was_set:
+    - is_physically_active: 'True'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_predict_heart_disease_risk
+  - action: utter_would_like_advice
+  - intent: deny
+  - action: utter_goodbye
 - story: Ask domain-related question
   steps:
   - intent: ask_question
@@ -90,6 +150,7 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - action: action_predict_heart_disease_risk
+  - action: utter_would_like_advice
 
 - story: happy path
   steps:
@@ -189,11 +250,15 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_predict_heart_disease_risk
-  - intent: request_advice
+  - action: utter_would_like_advice
+  - intent: affirm
+#  - intent: request_advice
   - action: action_give_personalized_advice
   - action: utter_did_that_help
   - intent: affirm
   - action: action_save_marker_found_advice_useful
+
+
 
 - story: interactive_story_1
   steps:
@@ -251,7 +316,9 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_predict_heart_disease_risk
-  - intent: request_advice
+  - action: utter_would_like_advice
+#  - intent: request_advice
+  - intent: affirm
   - action: action_give_personalized_advice
   - action: utter_did_that_help
   - intent: affirm
@@ -264,3 +331,67 @@ stories:
   - action: utter_greet
   - intent: ask_question
   - action: action_answer_question
+  - action: action_save_marker_user_asked_faq
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: action_save_marker_user_began_conversation
+  - action: utter_greet
+  - intent: request_cvd_prediction
+  - action: predict_cvd_form
+  - active_loop: predict_cvd_form
+  - slot_was_set:
+    - requested_slot: age
+  - slot_was_set:
+    - age: '60'
+  - slot_was_set:
+    - requested_slot: gender
+  - slot_was_set:
+    - gender: female
+  - slot_was_set:
+    - requested_slot: height
+  - slot_was_set:
+    - height: '170'
+  - slot_was_set:
+    - requested_slot: weight
+  - slot_was_set:
+    - weight: '70'
+  - slot_was_set:
+    - requested_slot: systolic_blood_pressure
+  - slot_was_set:
+    - systolic_blood_pressure: '129'
+  - slot_was_set:
+    - requested_slot: diastolic_blood_pressure
+  - slot_was_set:
+    - diastolic_blood_pressure: '60'
+  - slot_was_set:
+    - requested_slot: cholesterol_level
+  - slot_was_set:
+    - cholesterol_level: well above normal
+  - slot_was_set:
+    - requested_slot: glucose_level
+  - slot_was_set:
+    - glucose_level: above normal
+  - slot_was_set:
+    - requested_slot: drinks_alcohol
+  - slot_was_set:
+    - drinks_alcohol: 'True'
+  - slot_was_set:
+    - requested_slot: is_smoking
+  - slot_was_set:
+    - is_smoking: 'False'
+  - slot_was_set:
+    - requested_slot: is_physically_active
+  - slot_was_set:
+    - is_physically_active: 'False'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_predict_heart_disease_risk
+  - action: utter_would_like_advice
+  - intent: affirm
+  - action: action_give_personalized_advice
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: action_save_marker_found_advice_useful

@@ -1,6 +1,7 @@
 version: '3.1'
 intents:
 - affirm
+- ask_domain_related_question
 - ask_question
 - bot_challenge
 - deny
@@ -33,9 +34,9 @@ intents:
 - request_cvd_prediction
 entities:
 - boolean_entity
-- level
 - number
 - gender
+- level
 - drinks_alcohol
 slots:
   age:
@@ -155,13 +156,13 @@ slots:
         requested_slot: is_physically_active
 responses:
   utter_ask_height:
-  - text: what is height?
+  - text: What is your height?
   utter_ask_weight:
-  - text: what is weight?
+  - text: What is your weight?
   utter_ask_systolic_blood_pressure:
-  - text: what is systolic_blood_pressure?
+  - text: What is your usual systolic blood pressure?
   utter_ask_diastolic_blood_pressure:
-  - text: what is diastolic_blood_pressure?
+  - text: What is your usual diastolic blood pressure?
   utter_greet:
   - text: Hey! How are you?
   utter_ask_age:
@@ -210,6 +211,11 @@ responses:
   utter_cheer_up:
   - text: 'Here is something to cheer you up:'
     image: https://i.imgur.com/nGF1K8f.jpg
+  utter_faq/ask_what_can_you_do:
+  - text: 'I can help you with the following:'
+    buttons:
+    - payload: Predict risk of developing a heart disease
+      title: Predict risk of developing a heart disease
   utter_faq/ask_normal_blood_pressure_values:
   - text: 'Blood pressure numbers of less than 120/80 mmHg, that is less than 120 mmHg systolic and less than 80 mmHg diastolic, are considered within the normal range. '
   utter_faq/ask_blood_pressure_ranges:
@@ -228,6 +234,15 @@ responses:
   - text: Bye
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  utter_go_ahead:
+  - text: Sure, go ahead.
+  utter_would_like_advice:
+  - text: Would you also like to receive personalized advice based on what we discussed?
+    buttons:
+    - payload: Yes
+      title: Yes
+    - payload: No
+      title: No
 actions:
 - action_answer_question
 - action_give_personalized_advice
@@ -250,7 +265,9 @@ actions:
 - utter_ask_weight
 - utter_did_that_help
 - utter_faq
+- utter_go_ahead
 - utter_greet
+- utter_would_like_advice
 forms:
   predict_cvd_form:
     required_slots:
