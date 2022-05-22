@@ -2,6 +2,27 @@ version: "3.1"
 
 rules:
 
+- rule: Activate Calculate Blood Pressure Form
+  steps:
+  - intent: request_bp_calculation
+  - action: calculate_bp_form
+  - active_loop: calculate_bp_form
+
+- rule: Submit Calculate Blood Pressure Disease Form
+  condition:
+  - active_loop: calculate_bp_form
+  steps:
+  - action: calculate_bp_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_calculate_bp
+
+
+
+
+
+
 - rule: Would like advice
   steps:
   - action: action_predict_heart_disease_risk

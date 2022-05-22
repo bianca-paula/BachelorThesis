@@ -1,0 +1,77 @@
+ body {
+	 font-size: 14px;
+	 line-height: 1.5em;
+	 font-weight: 400;
+}
+ strong {
+	 font-weight: 600;
+}
+ h1, h2, h3, h4, h5, h6 {
+	 line-height: 1.5em;
+	 font-weight: 300;
+}
+
+.row{
+    padding-top:2em;
+}
+
+ .tile {
+	 width: 100%;
+	 display: inline-block;
+	 box-sizing: border-box;
+	 padding: 20px;
+	 margin-bottom: 10px;
+     box-shadow: 5px 5px 5px rgb(198, 196, 196);
+     border-radius: 5px;
+}
+ .tile .title {
+	 margin-top: 0px;
+}
+ .tile.purple, .tile.blue, .tile.red, .tile.orange, .tile.green {
+	 color: #fff;
+}
+ .tile.purple {
+	 background: #5133ab;
+}
+ .tile.purple:hover {
+	 background: #3e2784;
+}
+ .tile.red {
+	 background: #ac193d;
+}
+ .tile.red:hover {
+	 background: #7f132d;
+}
+ .tile.green {
+	 background: #00a600;
+}
+ .tile.green:hover {
+	 background: #007300;
+}
+ .tile.blue {
+	 /* background: #2672ec; */
+     background: #0A58D4;
+
+}
+ .tile.blue:hover {
+	 /* background: #125acd; */
+     background: #0042ac;
+}
+ .tile.orange {
+	 background: #dc572e;
+}
+ .tile.orange:hover {
+	 background: #b8431f;
+}
+ 
+.statistics-tile-image{
+    /* max-width: 300px;
+    height:auto; */
+}
+
+.statistic-tile{
+    /* border: 1px solid;*/
+    /* margin: 20px; */
+    /* box-shadow: 10px 10px 5px #aaaaaa; */
+    
+}

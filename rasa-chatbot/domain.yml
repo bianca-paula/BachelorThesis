@@ -32,6 +32,7 @@ intents:
 - nlu_fallback
 - request_advice
 - request_cvd_prediction
+- request_bp_calculation
 entities:
 - boolean_entity
 - number
@@ -81,6 +82,8 @@ slots:
       conditions:
       - active_loop: predict_cvd_form
         requested_slot: systolic_blood_pressure
+      - active_loop: calculate_bp_form
+        requested_slot: systolic_blood_pressure
   diastolic_blood_pressure:
     type: float
     min_value: 40
@@ -91,6 +94,8 @@ slots:
       entity: number
       conditions:
       - active_loop: predict_cvd_form
+        requested_slot: diastolic_blood_pressure
+      - active_loop: calculate_bp_form
         requested_slot: diastolic_blood_pressure
   gender:
     type: text
@@ -244,6 +249,7 @@ responses:
     - payload: No
       title: No
 actions:
+- action_calculate_bp
 - action_answer_question
 - action_give_personalized_advice
 - action_predict_heart_disease_risk
@@ -282,6 +288,10 @@ forms:
     - drinks_alcohol
     - is_smoking
     - is_physically_active
+  calculate_bp_form:
+    required_slots:
+      - systolic_blood_pressure
+      - diastolic_blood_pressure
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

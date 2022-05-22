@@ -17,9 +17,10 @@ export class ChatbotComponent implements OnInit {
   } 
 
   clickEvent(){
-    console.log("You clicked!");
-    let element :HTMLElement = document.getElementsByClassName("css-by5ua0")[0] as HTMLElement;
-    element.click();
+    let chatWidgetElement :HTMLElement = document.getElementsByClassName("css-by5ua0")[0] as HTMLElement;
+    chatWidgetElement.click();
+    let chatbotPromptElement :HTMLElement = document.getElementsByClassName("outerContainer")[0] as HTMLElement;
+    chatbotPromptElement.style.display="none";
   }
 
 }

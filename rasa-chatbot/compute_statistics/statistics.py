@@ -68,7 +68,7 @@ class Statistics:
         ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
         # plt.show()
-        plt.savefig('./compute_statistics/statistics_images/gender_ratio.png')
+        plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/gender_ratio.png',transparent=True)
 
     def compute_statistics_cvd_prediction_ratio(self):
         # Pie chart, where the slices will be ordered and plotted counter-clockwise:
@@ -80,7 +80,7 @@ class Statistics:
                 shadow=True, startangle=90)
         ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
         # plt.show()
-        plt.savefig('./compute_statistics/statistics_images/cvd_prediction_ratio.png')
+        plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/cvd_prediction_ratio.png',transparent=True)
 
 
     def compute_statistics_users_habits(self):
@@ -107,7 +107,7 @@ class Statistics:
         fig.tight_layout()
 
         # plt.show()
-        plt.savefig('./compute_statistics/statistics_images/user_habits.png')
+        plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/user_habits.png',transparent=True)
     def compute_statistics_users_blood_pressure(self):
         # Pie chart, where the slices will be ordered and plotted counter-clockwise:
         labels = 'Low', 'Normal', 'Elevated', "Hypertension"
@@ -120,7 +120,7 @@ class Statistics:
         ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
         # plt.show()
-        plt.savefig('./compute_statistics/statistics_images/users_blood_pressure.png')
+        plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/users_blood_pressure.png',transparent=True)
 
 
     def compute_statistics_user_responses_by_month(self):
@@ -158,7 +158,7 @@ class Statistics:
         plt.title("Number of entries")
 
         # plt.show()
-        plt.savefig('./compute_statistics/statistics_images/graph_queries_by_month.png')
+        plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/graph_queries_by_month.png',transparent=True)
 
 
     def compute_statistics_users_found_advice_useful(self):
@@ -169,7 +169,7 @@ class Statistics:
         percentage = round((self.get_count_found_advice_useful()/self.get_count_asked_for_advice())*100, 1)
         plt.text(0, 0, str(percentage)+"%", ha='center', va='center', fontsize=42)
         # plt.show()
-        plt.savefig('./compute_statistics/statistics_images/users_found_advice_useful.png')
+        plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/users_found_advice_useful.png',transparent=True)
 
 
     def compute_statistics_users_asked_for_cvd_prediction(self):
@@ -180,7 +180,8 @@ class Statistics:
         percentage = round((self.get_count_asked_for_cvd_prediction()/self.get_count_user_began_conversation())*100, 1)
         plt.text(0, 0, str(percentage)+"%", ha='center', va='center', fontsize=42)
         # plt.show()
-        plt.savefig('./compute_statistics/statistics_images/users_asked_for_cvd_prediction.png')
+        # plt.savefig('./compute_statistics/statistics_images/users_asked_for_cvd_prediction.png')
+        plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/users_asked_for_cvd_prediction.png',transparent=True)
 
 
     def compute_statistics_users_asked_faq(self):
@@ -192,7 +193,7 @@ class Statistics:
         percentage = round((self.get_count_user_asked_faq() / self.get_count_user_began_conversation()) * 100, 1)
         plt.text(0, 0, str(percentage) + "%", ha='center', va='center', fontsize=42)
         # plt.show()
-        plt.savefig('./compute_statistics/statistics_images/users_asked_faq.png')
+        plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/users_asked_faq.png',transparent=True)
 
 
 

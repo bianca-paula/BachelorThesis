@@ -5,6 +5,12 @@ nlu:
     - How can you help me?
     - What can you do for me?
     - What are you programmed to do?
+
+- intent: request_bp_calculation
+  examples: |
+    - Can you tell me if I have high blood pressure?
+    - Can you check how my blood pressure is?
+    - What category of blood pressure do I have?
 - intent: ask_domain_related_question
   examples: |
     - Ask a domain related question

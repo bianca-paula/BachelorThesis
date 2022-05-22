@@ -584,3 +584,19 @@ class ActionAnswerQuestion(Action):
         return []
 
 
+
+
+
+
+class ActionCalculateBP(Action):
+    def name(self) -> Text:
+        return "action_calculate_bp"
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        systolic_blood_pressure = int(tracker.get_slot("systolic_blood_pressure"))
+        diastolic_blood_pressure = int(tracker.get_slot("diastolic_blood_pressure"))
+        blood_pressure_type = get_blood_pressure_type(systolic_blood_pressure, diastolic_blood_pressure)
+        dispatcher.utter_message(text=f"Your blood pressure falls into {blood_pressure_type} category")
+
+        return []

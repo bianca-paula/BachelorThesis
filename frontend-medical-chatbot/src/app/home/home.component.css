@@ -1,7 +1,33 @@
-@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Philosopher:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Genos:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+
+.guide-headers{
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 1.5em;
+    
+}
+
+.guide-description{
+    padding: 0.7em 0.5em;
+    font-size: 1.2em;
+    color:#737373;
+}
+.heading-black{
+    color: black !important;
+}
+
 
 *{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'PT Sans', sans-serif;
      margin:0; 
      padding: 0;  
     box-sizing: border-box;
@@ -21,7 +47,9 @@ html{
     align-items: center;
     flex-wrap: wrap;
     gap:1.5rem;
-    padding-top: 10rem;
+    padding: 10rem 0rem ;
+    
+
 }
 
 .home .image{
@@ -37,17 +65,43 @@ html{
 }
 
 .home .content h3{
-    font-size: 4.5rem;
-    color:var(--black);
+    font-size: 3.5rem;
+    /* text-align: center; */
+    /* font-family: 'Aclonica', sans-serif; */
+    /* font-family: 'Philosopher', sans-serif; */
+    /* font-family: 'Merriweather Sans', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    /* color:var(--black); */
     line-height: 1.8;
-    text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
+    /* text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2); */
+    text-shadow: .18rem .18rem 0 rgba(0, 0, 0, .2);
+/* 
+    /* background: -webkit-linear-gradient(rgb(52, 93, 240), rgb(108, 177, 255)); */
+    /* -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+
+    /* background-image: linear-gradient(to right, #0A58CA 25%, #4b82ee); */
+    /* background-image: linear-gradient(to right, #0A58CA 25%, #31218c 5%, #e91e1e);  */
+
+}
+.home .content h3 .highlight-words{
+    color: #ED1B30;
+    background-color: white;
+    font-size: 3.5rem;
+    /* text-align: center; */
+    /* font-family: 'Philosopher', sans-serif; */
+    /* font-family: 'Merriweather Sans', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.8;
+    text-shadow: .18rem .18rem 0 rgba(0, 0, 0, .2);
 }
 
 .home .content p{
-    font-size: 1rem;
+    font-size: 1.5rem;
     color:var(--light-color);
     line-height: 1.8;
     padding: 1rem 0;
+    font-family: 'PT Sans', sans-serif;
 }
 
 
@@ -56,7 +110,10 @@ section{
 
 }
 section:nth-child(even){
-    background: #f5f5f5;
+    /* background: #f5f5f5; */
+    /* background: #0A58CA; */
+    background: #4880d4;
+
 }
 
 section:nth-child(odd){
@@ -200,28 +257,49 @@ input#img-6:checked ~ .nav-dots label#img-dot-6 {
 }
 
 .about .row .content h3{
-    padding-top: 2em;
-    color: black;
-    text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
+    padding: 2rem 1rem 1rem 1rem;
+    
+    /* color: black; */
+    color: white;
+    /* text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2); */
     font-size: 3rem;
     line-height: 1.8;
+    text-shadow: .1rem .1rem 0 rgba(0, 0, 0, .2);
+    font-family: 'PT Sans', sans-serif;
 }
 
 .about .row .content p{
-    color: #777;
-    padding:1rem 0;
+    color: rgb(255, 255, 255);
+    padding:1rem 1rem;
     font-size: 1rem;
     line-height: 1.8;
+    font-family: 'PT Sans', sans-serif;
 }
 
 .heading{
     text-align: center;
-    /* padding-bottom: 2rem; */
-    text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2);
-    text-transform: uppercase;
-    color:black;
-    font-size: 3rem;
-    letter-spacing: .4rem;
+    padding-bottom: 2rem;
+    /* text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2); */
+    /* text-transform: uppercase; */
+    /* color:black; */
+    /* font-size: 3rem; */
+    /* letter-spacing: .4rem; */
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+
+
+    font-size: 3.5rem;
+    /* text-align: center; */
+    /* font-family: 'Merriweather Sans', sans-serif; */
+    /* color:var(--black); */
+    line-height: 1.8;
+    /* text-shadow: .4rem .4rem 0 rgba(0, 0, 0, .2); */
+    text-shadow: .18rem .18rem 0 rgba(0, 0, 0, .2);
+
+    text-decoration: underline;     
+    text-decoration-color: white;  
+    text-decoration-thickness: 5px;
+    text-underline-offset: 10px;
 }
 
 .heading span{
