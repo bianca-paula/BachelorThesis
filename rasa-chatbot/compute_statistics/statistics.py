@@ -3,6 +3,9 @@ from matplotlib import pyplot as plt
 from datetime import datetime
 from matplotlib import rcParams
 import numpy as np
+from math import pi
+from matplotlib.lines import Line2D
+
 
 class Statistics:
     def __init__(self, path):
@@ -71,14 +74,28 @@ class Statistics:
         plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/gender_ratio.png',transparent=True)
 
     def compute_statistics_cvd_prediction_ratio(self):
-        # Pie chart, where the slices will be ordered and plotted counter-clockwise:
         labels = 'At risk', 'Not at risk'
         sizes = [self.get_count_cvd_prediction_true(), self.get_count_cvd_prediction_false()]
         explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+        mycolors = ["#ED1B30", "#573BFF"]
         fig1, ax1 = plt.subplots()
-        ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        ax1.pie(sizes, explode=explode, colors=mycolors, autopct='%1.1f%%', textprops={'fontsize': 12},
                 shadow=True, startangle=90)
         ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+        legend_elements = [
+            Line2D([0], [0], marker='o', color='w', label='At risk', markerfacecolor='#ED1B30', markersize=14),
+            Line2D([0], [0], marker='o', color='w', label='Not at risk', markerfacecolor='#573BFF', markersize=14)]
+
+        plt.legend(handles=legend_elements, bbox_to_anchor=(1.15, 1), frameon=False)
+        # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+        # labels = 'At risk', 'Not at risk'
+        # sizes = [self.get_count_cvd_prediction_true(), self.get_count_cvd_prediction_false()]
+        # explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+        # fig1, ax1 = plt.subplots()
+        # ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        #         shadow=True, startangle=90)
+        # ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
         # plt.show()
         plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/cvd_prediction_ratio.png',transparent=True)
 
@@ -92,12 +109,12 @@ class Statistics:
         width = 0.35  # the width of the bars
 
         fig, ax = plt.subplots()
-        rects1 = ax.bar(x + width/2, no_means, width, label='No')
-        rects2 = ax.bar(x - width/2, yes_means, width, label='Yes')
+        rects1 = ax.bar(x + width/2, no_means, width, label='No', color='#00C3F9')
+        rects2 = ax.bar(x - width/2, yes_means, width, label='Yes', color='#ED1B30')
 
         # Add some text for labels, title and custom x-axis tick labels, etc.
         ax.set_ylabel('Scores')
-        ax.set_title('User habits')
+        # ax.set_title('User habits')
         ax.set_xticks(x, labels)
         ax.legend()
         ax.bar_label(rects1, padding=3)
@@ -109,21 +126,40 @@ class Statistics:
         # plt.show()
         plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/user_habits.png',transparent=True)
     def compute_statistics_users_blood_pressure(self):
-        # Pie chart, where the slices will be ordered and plotted counter-clockwise:
         labels = 'Low', 'Normal', 'Elevated', "Hypertension"
         sizes = [self.get_count_user_has_low_bp(), self.get_count_user_has_normal_bp(),self.get_count_user_has_elevated_bp(), self.get_count_user_has_hypertension_bp()]
         explode = (0, 0, 0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
+        mycolors = ["#00C3F9", "#573BFF", "#FF4756", "#ED1B30"]
         fig1, ax1 = plt.subplots()
-        ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        ax1.pie(sizes, explode=explode, colors=mycolors, autopct='%1.1f%%', textprops={'fontsize': 12},
                 shadow=True, startangle=90)
         ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+        legend_elements = [
+            Line2D([0], [0], marker='o', color='w', label='Low', markerfacecolor='#00C3F9', markersize=14),
+            Line2D([0], [0], marker='o', color='w', label='Normal', markerfacecolor='#573BFF', markersize=14),
+            Line2D([0], [0], marker='o', color='w', label='Elevated', markerfacecolor='#FF4756', markersize=14),
+            Line2D([0], [0], marker='o', color='w', label='Hypertension', markerfacecolor='#ED1B30', markersize=14)]
+
+        plt.legend(handles=legend_elements, bbox_to_anchor=(1.15, 1), frameon=False)
+
+
+        # # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+        # labels = 'Low', 'Normal', 'Elevated', "Hypertension"
+        # sizes = [self.get_count_user_has_low_bp(), self.get_count_user_has_normal_bp(),self.get_count_user_has_elevated_bp(), self.get_count_user_has_hypertension_bp()]
+        # explode = (0, 0, 0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+        #
+        # fig1, ax1 = plt.subplots()
+        # ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        #         shadow=True, startangle=90)
+        # ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
         # plt.show()
         plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/users_blood_pressure.png',transparent=True)
 
 
     def compute_statistics_user_responses_by_month(self):
+        plt.style.use("seaborn-darkgrid")
         current_year = datetime.now().year
         current_month = datetime.now().month
         self.data['timestamp'] = pd.to_datetime(self.data['timestamp'], format="%Y-%m-%d %H:%M:%S")
@@ -152,46 +188,84 @@ class Statistics:
 
         plt.ylim(0)
 
-        plt.fill_between(months, responses_array)
+        # plt.fill_between(months, responses_array)
         plt.xlabel("Month")
         plt.ylabel("Number of responses")
-        plt.title("Number of entries")
+        # plt.title("Number of entries")
 
         # plt.show()
         plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/graph_queries_by_month.png',transparent=True)
 
 
     def compute_statistics_users_found_advice_useful(self):
-        fig, ax = plt.subplots(figsize=(6, 6))
-        wedgeprops = {'width':0.3, 'edgecolor':'black', 'linewidth':3}
-        ax.pie([self.get_count_found_advice_useful(),self.get_count_asked_for_advice()-self.get_count_found_advice_useful()], wedgeprops=wedgeprops, startangle=90, colors=['#5DADE2', '#515A5A'])
-        plt.title('Users found advice useful', fontsize=24, loc='left')
-        percentage = round((self.get_count_found_advice_useful()/self.get_count_asked_for_advice())*100, 1)
-        plt.text(0, 0, str(percentage)+"%", ha='center', va='center', fontsize=42)
-        # plt.show()
+        fig, ax = plt.subplots(figsize=(6, 6), subplot_kw={'projection': 'polar'})
+        data = round((self.get_count_found_advice_useful()/self.get_count_asked_for_advice())*100, 1)
+        startangle = 90
+        x = (data * pi * 2) / 100
+        left = (startangle * pi * 2) / 360  # this is to control where the bar starts
+        plt.xticks([])
+        plt.yticks([])
+        ax.spines.clear()
+        ax.barh(1, x, left=left, height=1, color='#ED1B30')
+        plt.ylim(-3, 3)
+        plt.text(0, -3, str(data)+"%", ha='center', va='center', fontsize=42)
+        # fig, ax = plt.subplots(figsize=(6, 6))
+        # wedgeprops = {'width':0.3, 'edgecolor':'black', 'linewidth':3}
+        # ax.pie([self.get_count_found_advice_useful(),self.get_count_asked_for_advice()-self.get_count_found_advice_useful()], wedgeprops=wedgeprops, startangle=90, colors=['#5DADE2', '#515A5A'])
+        # plt.title('Users found advice useful', fontsize=24, loc='left')
+        # percentage = round((self.get_count_found_advice_useful()/self.get_count_asked_for_advice())*100, 1)
+        # plt.text(0, 0, str(percentage)+"%", ha='center', va='center', fontsize=42)
+        # # plt.show()
         plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/users_found_advice_useful.png',transparent=True)
 
-
     def compute_statistics_users_asked_for_cvd_prediction(self):
-        fig, ax = plt.subplots(figsize=(6, 6))
-        wedgeprops = {'width':0.3, 'edgecolor':'black', 'linewidth':3}
-        ax.pie([self.get_count_asked_for_cvd_prediction(), self.get_count_user_began_conversation()-self.get_count_asked_for_cvd_prediction()], wedgeprops=wedgeprops, startangle=90, colors=['#5DADE2', '#515A5A'])
-        plt.title('Users asked for CVD prediction', fontsize=24, loc='left')
-        percentage = round((self.get_count_asked_for_cvd_prediction()/self.get_count_user_began_conversation())*100, 1)
-        plt.text(0, 0, str(percentage)+"%", ha='center', va='center', fontsize=42)
+        fig, ax = plt.subplots(figsize=(6, 6), subplot_kw={'projection': 'polar'})
+
+        data = round((self.get_count_asked_for_cvd_prediction()/self.get_count_user_began_conversation())*100, 1)
+        startangle = 90
+
+        x = (data * pi * 2) / 100
+        left = (startangle * pi * 2) / 360  # this is to control where the bar starts
+
+        plt.xticks([])
+        plt.yticks([])
+        ax.spines.clear()
+        ax.barh(1, x, left=left, height=1, color='#ED1B30')
+        plt.ylim(-3, 3)
+        plt.text(0, -3, str(data)+"%", ha='center', va='center', fontsize=42)
+        # fig, ax = plt.subplots(figsize=(6, 6))
+        # wedgeprops = {'width':0.3, 'edgecolor':'black', 'linewidth':3}
+        # ax.pie([self.get_count_asked_for_cvd_prediction(), self.get_count_user_began_conversation()-self.get_count_asked_for_cvd_prediction()], wedgeprops=wedgeprops, startangle=90, colors=['#5DADE2', '#515A5A'])
+        # plt.title('Users asked for CVD prediction', fontsize=24, loc='left')
+        # percentage = round((self.get_count_asked_for_cvd_prediction()/self.get_count_user_began_conversation())*100, 1)
+        # plt.text(0, 0, str(percentage)+"%", ha='center', va='center', fontsize=42)
         # plt.show()
         # plt.savefig('./compute_statistics/statistics_images/users_asked_for_cvd_prediction.png')
         plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/users_asked_for_cvd_prediction.png',transparent=True)
 
 
     def compute_statistics_users_asked_faq(self):
-        fig, ax = plt.subplots(figsize=(6, 6))
-        wedgeprops = {'width': 0.3, 'edgecolor': 'black', 'linewidth': 3}
-        ax.pie([self.get_count_user_asked_faq(), self.get_count_user_began_conversation() - self.get_count_user_asked_faq()], wedgeprops=wedgeprops,
-               startangle=90, colors=['#5DADE2', '#515A5A'])
-        plt.title('Users asked FAQ', fontsize=24, loc='left')
-        percentage = round((self.get_count_user_asked_faq() / self.get_count_user_began_conversation()) * 100, 1)
-        plt.text(0, 0, str(percentage) + "%", ha='center', va='center', fontsize=42)
+        fig, ax = plt.subplots(figsize=(6, 6), subplot_kw={'projection': 'polar'})
+
+        data = round((self.get_count_user_asked_faq() / self.get_count_user_began_conversation()) * 100, 1)
+        startangle = 90
+
+        x = (data * pi * 2) / 100
+        left = (startangle * pi * 2) / 360  # this is to control where the bar starts
+
+        plt.xticks([])
+        plt.yticks([])
+        ax.spines.clear()
+        ax.barh(1, x, left=left, height=1, color='#ED1B30')
+        plt.ylim(-3, 3)
+        plt.text(0, -3, str(data) + "%", ha='center', va='center', fontsize=42)
+        # fig, ax = plt.subplots(figsize=(6, 6))
+        # wedgeprops = {'width': 0.3, 'edgecolor': 'black', 'linewidth': 3}
+        # ax.pie([self.get_count_user_asked_faq(), self.get_count_user_began_conversation() - self.get_count_user_asked_faq()], wedgeprops=wedgeprops,
+        #        startangle=90, colors=['#5DADE2', '#515A5A'])
+        # plt.title('Users asked FAQ', fontsize=24, loc='left')
+        # percentage = round((self.get_count_user_asked_faq() / self.get_count_user_began_conversation()) * 100, 1)
+        # plt.text(0, 0, str(percentage) + "%", ha='center', va='center', fontsize=42)
         # plt.show()
         plt.savefig('../frontend-medical-chatbot/src/assets/images/statistics/users_asked_faq.png',transparent=True)
 

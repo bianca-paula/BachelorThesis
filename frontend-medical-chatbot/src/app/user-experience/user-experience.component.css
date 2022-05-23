@@ -1,8 +1,19 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
  body {
 	 font-size: 14px;
 	 line-height: 1.5em;
 	 font-weight: 400;
 }
+
+#user-experience{
+	background-color: aliceblue;
+}
+
+.bi-people{
+	font-size:36px;
+}
+
  strong {
 	 font-weight: 600;
 }
@@ -23,9 +34,16 @@
 	 margin-bottom: 10px;
      box-shadow: 5px 5px 5px rgb(198, 196, 196);
      border-radius: 5px;
+	 border-style: inset;
 }
  .tile .title {
 	 margin-top: 0px;
+	 color:black;
+	 font-weight:400;
+}
+
+.tile p {
+	color:black;
 }
  .tile.purple, .tile.blue, .tile.red, .tile.orange, .tile.green {
 	 color: #fff;
@@ -50,7 +68,8 @@
 }
  .tile.blue {
 	 /* background: #2672ec; */
-     background: #0A58D4;
+     /* background: #0A58D4; */
+	 background: rgb(255, 255, 255);
 
 }
  .tile.blue:hover {
@@ -67,6 +86,7 @@
 .statistics-tile-image{
     /* max-width: 300px;
     height:auto; */
+	max-width: 70%;
 }
 
 .statistic-tile{
