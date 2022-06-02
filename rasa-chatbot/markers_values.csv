@@ -20,10 +20,76 @@ d2b3a217cd16492baca27240f776322e,0,marker_user_began_conversation,2022-05-18 10:
 62274b6caf2e45e3ad7a42ef8671b122,0,marker_asked_for_advice,2022-05-18 11:56:05.514652
 62274b6caf2e45e3ad7a42ef8671b122,0,marker_found_advice_useful,2022-05-18 11:57:46.855684
 9d895273862a4fd1897db13a6341d74d,0,marker_user_began_conversation,2022-05-18 12:47:07.234140
-4d99f6ea4c6c4a0aad8fa84f63f724f3,0,marker_user_began_conversation,2022-05-18 13:02:58.740367
-6b964d5e17504503850057ebe1fa9056,0,marker_user_began_conversation,2022-05-23 00:25:15.443741
-6b964d5e17504503850057ebe1fa9056,0,marker_user_began_conversation,2022-05-23 00:28:20.309912
-6b964d5e17504503850057ebe1fa9056,0,marker_user_began_conversation,2022-05-23 00:30:34.363097
-6b964d5e17504503850057ebe1fa9056,0,marker_user_began_conversation,2022-05-23 00:34:54.076628
-6b964d5e17504503850057ebe1fa9056,0,marker_user_began_conversation,2022-05-23 00:37:56.904489
-6b964d5e17504503850057ebe1fa9056,0,marker_user_began_conversation,2022-05-23 00:39:47.821592
+
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-05-22 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_user_asked_faq,2022-05-22 00:42:34.142628
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-05-22 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_user_asked_faq,2022-05-22 00:42:34.142628
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-05-22 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_user_asked_faq,2022-05-22 00:42:34.142628
+
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-04-16 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_user_asked_faq,2022-04-16 00:42:34.142628
+cda78fb6114248268d67af3afbad4950,0,marker_asked_for_cvd_prediction,2022-04-16 00:43:26.804879
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_male,2022-04-16 00:43:27.165844
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_has_normal_bp,2022-04-16 00:43:27.304838
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_smoking,2022-04-16 00:43:27.446842
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_physically_active,2022-04-16 00:43:27.637875
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_false,2022-04-16 00:43:28.451840
+
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-04-16 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_user_asked_faq,2022-04-16 00:42:34.142628
+cda78fb6114248268d67af3afbad4950,0,marker_asked_for_cvd_prediction,2022-04-16 00:43:26.804879
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_male,2022-04-16 00:43:27.165844
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_has_elevated_bp,2022-04-16 00:43:27.304838
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_drinking,2022-04-16 00:43:27.446842
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_false,2022-04-16 00:43:28.451840
+
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-04-16 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_asked_for_cvd_prediction,2022-04-16 00:43:26.804879
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_female,2022-04-16 00:43:27.165844
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_has_low_bp,2022-04-16 00:43:27.304838
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_smoking,2022-04-16 00:43:27.446842
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_true,2022-04-16 00:43:28.451840
+
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-04-16 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_user_asked_faq,2022-04-16 00:42:34.142628
+cda78fb6114248268d67af3afbad4950,0,marker_asked_for_cvd_prediction,2022-04-16 00:43:26.804879
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_male,2022-04-16 00:43:27.165844
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_has_hypertension_bp,2022-04-16 00:43:27.304838
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_smoking,2022-04-16 00:43:27.446842
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_drinking,2022-04-16 00:43:27.637875
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_true,2022-04-16 00:43:28.451840
+
+cda78fb6114248268d67af3afbad4950,0,marker_user_began_conversation,2022-04-16 00:42:10.168148
+cda78fb6114248268d67af3afbad4950,0,marker_user_asked_faq,2022-04-16 00:42:34.142628
+cda78fb6114248268d67af3afbad4950,0,marker_asked_for_cvd_prediction,2022-04-16 00:43:26.804879
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_male,2022-04-16 00:43:27.165844
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_has_normal_bp,2022-04-16 00:43:27.304838
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_smoking,2022-04-16 00:43:27.446842
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_user_is_physically_active,2022-04-16 00:43:27.637875
+cda78fb6114248268d67af3afbad4950,0,marker_cvd_prediction_false,2022-04-16 00:43:28.451840
+
+fe0970fdbb274a4787743ede99beb6ca,0,marker_user_began_conversation,2022-05-23 13:37:29.396207
+fe0970fdbb274a4787743ede99beb6ca,0,marker_asked_for_cvd_prediction,2022-05-23 13:39:34.305006
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_user_male,2022-05-23 13:39:34.689433
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_user_has_hypertension_bp,2022-05-23 13:39:34.789461
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_user_drinks_alcohol,2022-05-23 13:39:34.936608
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_user_is_smoking,2022-05-23 13:39:35.090078
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_true,2022-05-23 13:39:35.927569
+fe0970fdbb274a4787743ede99beb6ca,0,marker_asked_for_advice,2022-05-23 13:39:44.644362
+fe0970fdbb274a4787743ede99beb6ca,0,marker_found_advice_useful,2022-05-23 13:39:52.570702
+fe0970fdbb274a4787743ede99beb6ca,0,marker_user_asked_faq,2022-05-23 13:41:42.452086
+fe0970fdbb274a4787743ede99beb6ca,0,marker_asked_for_cvd_prediction,2022-05-23 13:42:23.440221
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_user_male,2022-05-23 13:42:23.708902
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_user_has_hypertension_bp,2022-05-23 13:42:23.808992
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_user_drinks_alcohol,2022-05-23 13:42:23.944332
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_user_is_smoking,2022-05-23 13:42:24.094161
+fe0970fdbb274a4787743ede99beb6ca,0,marker_cvd_prediction_true,2022-05-23 13:42:25.762259
+fe0970fdbb274a4787743ede99beb6ca,0,marker_user_asked_faq,2022-05-23 13:43:14.198270
+998c5207c9b34d84a791809f88accdb7,0,marker_user_began_conversation,2022-05-24 08:42:24.914482
+998c5207c9b34d84a791809f88accdb7,0,marker_asked_for_cvd_prediction,2022-05-24 08:44:38.314611
+998c5207c9b34d84a791809f88accdb7,0,marker_cvd_prediction_user_female,2022-05-24 08:44:38.646097
+998c5207c9b34d84a791809f88accdb7,0,marker_cvd_prediction_user_has_hypertension_bp,2022-05-24 08:44:38.784255
+998c5207c9b34d84a791809f88accdb7,0,marker_cvd_prediction_user_is_smoking,2022-05-24 08:44:38.974836
+998c5207c9b34d84a791809f88accdb7,0,marker_cvd_prediction_true,2022-05-24 08:44:39.877834

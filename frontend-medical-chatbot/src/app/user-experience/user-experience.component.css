@@ -1,4 +1,5 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
  body {
 	 font-size: 14px;
@@ -74,7 +75,7 @@
 }
  .tile.blue:hover {
 	 /* background: #125acd; */
-     background: #0042ac;
+     background: #b2cefa;
 }
  .tile.orange {
 	 background: #dc572e;
@@ -89,9 +90,45 @@
 	max-width: 70%;
 }
 
+.statistics-tile-image-ratio{
+	max-width: 100%
+}
+
+.statistics-tile-image-graph{
+	max-width: 70%;
+}
+
 .statistic-tile{
     /* border: 1px solid;*/
     /* margin: 20px; */
     /* box-shadow: 10px 10px 5px #aaaaaa; */
     
+}
+
+hr{
+	/* border: 30px solid #ED1B30; */
+	height:0.3em;
+	color:#ED1B30;
+	opacity: 1;
+	margin-bottom: 50px;
+}
+
+hr:hover{
+	color:#6c757d;
+}
+
+
+#user-experience-heading{
+	color:#2E333C;
+}
+
+p{
+	margin-bottom: 0px;
+	color:#737373;
+	font-size: 1.2em;
+	font-family: 'PT Sans', sans-serif;
+}
+
+h3{
+	font-size: 1.2em;
 }
